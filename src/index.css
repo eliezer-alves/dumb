@@ -35,7 +35,7 @@ h3 {
 }
 
 input {
-  @apply py-3 px-6 border-3 rounded-md
+  @apply m-1 py-3 px-6 border-3 rounded-md
   text-xl
   border-gray-200
   hover:border-gray-400
@@ -53,9 +53,37 @@ input {
 }
 
 .btn {
-  @apply py-3 px-8 rounded-md text-xl text-white font-semibold duration-200 ease-in-out hover:opacity-70
+  @apply
+  m-1 py-3 px-8
+  border-3 border-gray-200 rounded-md
+  text-xl font-semibold
+  hover:opacity-70
+  duration-200 ease-in-out
 }
 
 .btn-primary {
-  @apply bg-primary-400
+  @apply bg-primary-400 text-white border-0
+}
+
+.btn-dark {
+  @apply 
+  hover:bg-secondary-300 hover:text-white hover:opacity-100
+}
+
+
+
+.separator {
+  @apply my-4 w-2/3 flex-center text-gray-400
+}
+
+.separator::before {
+  @apply flex-1 mr-4 bg-gray-400;
+	content: '';
+	height: 1px;
+}
+
+.separator::after {
+  @apply flex-1 ml-4 bg-gray-400;
+	content: '';
+	height: 1px;
 }
