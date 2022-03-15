@@ -70,7 +70,10 @@ input {
   hover:bg-secondary-300 hover:text-white hover:opacity-100
 }
 
-
+.link {
+  @apply hover:cursor-pointer hover:text-secondary-300
+  duration-200 ease-in-out
+}
 
 .separator {
   @apply my-4 w-2/3 flex-center text-gray-400
