@@ -16,6 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+textarea:focus, input:focus, select:focus {
+  outline: 0;
+} 
+
 h1 {
   @apply text-6xl mb-6;
   color: #1A2935;
@@ -31,7 +35,12 @@ h3 {
 }
 
 input {
-  @apply py-2 px-4 border-2 border-gray-300 duration-200 ease-in-out hover:border-gray-400 focus:border-primary-300 rounded-md
+  @apply py-3 px-6 border-3 rounded-md
+  text-xl
+  border-gray-200
+  hover:border-gray-400
+  focus:border-primary-400
+  duration-200 ease-in-out
 }
 
 /* My custom classes */
