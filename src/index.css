@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
 
 html, body, #root{
   @apply h-full;
@@ -52,6 +53,10 @@ input {
   @apply flex flex-col justify-center items-center
 }
 
+.flex-between {
+  @apply flex justify-between items-center
+}
+
 .btn {
   @apply
   m-1 py-3 px-8
@@ -68,6 +73,10 @@ input {
 .btn-dark {
   @apply 
   hover:bg-secondary-300 hover:text-white hover:opacity-100
+}
+
+.font-fredoka {
+  font-family: 'Fredoka', sans-serif;;
 }
 
 .link {

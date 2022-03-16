@@ -3,7 +3,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {      
+    extend: {
+      spacing: {
+        '1/10': '10%',
+        '9/10': '90%',
+        '1/12': '8.33%',
+        '11/12': '91.66%',
+      },
       colors: {
         'primary': {
           '50': '#D6E9FF',
