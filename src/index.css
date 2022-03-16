@@ -22,17 +22,17 @@ textarea:focus, input:focus, select:focus {
 } 
 
 h1 {
-  @apply text-6xl mb-6;
-  color: #1A2935;
+  @apply text-3xl text-secondary-400 mb-6
+  xsm:text-4xl sm:text-5xl md:text-6xl
 }
 
 h2 {
-  @apply text-3xl;
-  color: #1A2935;
+  @apply text-xl text-secondary-400
+  xsm:text-2xl md:text-3xl
 }
 
 h3 {
-  @apply text-xl
+  @apply text-lg xsm:text-xl
 }
 
 input {
@@ -82,6 +82,10 @@ input {
 .link {
   @apply hover:cursor-pointer hover:text-secondary-300
   duration-200 ease-in-out
+}
+
+.main {
+  @apply w-full xsm:w-2/3 px-8 xsm:px-0 flex-col-center
 }
 
 .separator {

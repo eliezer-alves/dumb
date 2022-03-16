@@ -1,18 +1,16 @@
 import { ReactNode } from "react";
-import { Body } from "../Body";
-import { TopBar } from "../TopBar";
+import { Body } from "./Body";
+import { TopBar } from "./TopBar";
 
-type PageProps = {
-  children: ReactNode;
+type BodyProps = {
+  children?: ReactNode;
 }
 
-export function Page({ children }: PageProps) {
+export function Page({children}: BodyProps) { 
   return (
-    <div className="w-full h-full">
-      <TopBar />
-      <Body>
-        {children}
-      </Body>
+    <div className="h-full flex-col-center">
+      <TopBar/>
+      <Body>{children}</Body>    
     </div>
   )
 }
