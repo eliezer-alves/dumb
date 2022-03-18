@@ -8,7 +8,7 @@ export function TopBar() {
   return (
     <div className="w-full h-1/6 py-4 px-12 flex-between">
       <Logo />
-      {user && <Profile avatar={user.avatar} />}
+      {user && <Profile avatar={user.avatar} name={user.name} />}
     </div>
   )
 }
