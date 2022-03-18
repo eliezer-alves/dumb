@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Page } from "../../components/Page";
 import { Table } from "../../components/Table";
 import { useRoom } from "../../hooks/useRoom";
@@ -9,7 +9,7 @@ type RoomParams = {
 export function Room() {
   const params = useParams<RoomParams>();
   const roomId = params.id ?? '';
-  const { name } = useRoom(roomId);
+  const { name, code} = useRoom(roomId);
 
   return (
     <Page>

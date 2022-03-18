@@ -11,9 +11,11 @@ export function useRoom(roomId: string) {
     const roomRef = database.ref(`rooms/${roomId}`)
 
     roomRef.on('value', room => {
-      const dataRoom = room.val()      
-      setName(dataRoom.name)
-      setCode(room.key ?? '')
+      const dataRoom = room.val()
+      if (dataRoom) {
+        setName(dataRoom.name)
+        setCode(roomId)
+      }
     })
     
   
