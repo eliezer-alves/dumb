@@ -20,7 +20,7 @@ export function Profile({id, name, avatar}: UserProps) {
   }
 
   return (
-    <div onClick={handleSignOut} className="py-2 px-4 flex justify-around items-center gap-4 link rounded-md hover:bg-gray-100 border-x-2">
+    <div onClick={handleSignOut} className="py-2 px-4 flex justify-around items-center gap-4 link rounded-md hover:bg-gray-100">
       <img className="rounded-full w-12 h-12" src={avatar} alt="" />
       <span className="text-2xl font-semibold">{firstName}</span>
       <img className="" src={signOutIcon} alt="" />

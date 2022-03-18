@@ -19,8 +19,10 @@ export function TopBar() {
   return (
     <div className="w-full h-1/6 py-4 px-12 flex-between">
       <Logo />
-      {code && <RoomCode code={code} />}
-      {user && <Profile avatar={user.avatar} name={user.name} />}
+      <div className="flex-center gap-4 divide-x-2">
+        {code && <RoomCode code={code} />}
+        {user && <Profile avatar={user.avatar} name={user.name} />}
+      </div>
     </div>
   )
 }
