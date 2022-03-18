@@ -13,8 +13,8 @@ export function TopBar() {
   const {user} = useAuth();
   
   const params = useParams<RoomParams>();
-  const roomId = params.id ?? '';
-  const { name, code } = useRoom(roomId);  
+  const roomCode = params.id ?? '';
+  const { name, code } = useRoom(roomCode);  
 
   return (
     <div className="w-full h-1/6 py-4 px-12 flex-between">
