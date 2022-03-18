@@ -5,14 +5,15 @@ import { useAuth } from "./useAuth"
 export function useRoom(roomId: string) {
   const { user } = useAuth()
   const [name, setName] = useState('')
+  const [code, setCode] = useState('')
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`)
 
     roomRef.on('value', room => {
-      const dataRoom = room.val()
+      const dataRoom = room.val()      
       setName(dataRoom.name)
-      
+      setCode(room.key ?? '')
     })
     
   
@@ -20,5 +21,5 @@ export function useRoom(roomId: string) {
   }, [roomId, user?.id])
   
 
-  return {name}
+  return {name, code}
 }
