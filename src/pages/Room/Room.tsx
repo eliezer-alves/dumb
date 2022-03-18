@@ -1,15 +1,12 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import { Page } from "../../components/Page";
 import { Table } from "../../components/Table";
-import { useAuth } from "../../hooks/useAuth";
 import { useRoom } from "../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
 }
 export function Room() {
-  const { user, signInWithGoogle } = useAuth();  
   const params = useParams<RoomParams>();
   const roomCode = params.id ?? '';
   const { name, code} = useRoom(roomCode);

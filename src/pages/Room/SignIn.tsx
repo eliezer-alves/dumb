@@ -3,13 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { database } from '../../services/firebase';
 import { Page } from "../../components/Page";
 import { Main } from "../../components/Page/Main";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
+  const { user, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 	const [roomCode, setRoomCode] = useState('');
 
   async function handleJoinRoom(e: FormEvent) {
 		e.preventDefault();
+
+    if (!user) {
+      await signInWithGoogle();
+    }
+
 
 		if (roomCode.trim() === '') {
 			return;
