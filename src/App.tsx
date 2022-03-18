@@ -11,8 +11,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/rooms/new' element={<Create />} />
-          <Route path='/sign-in-room' element={<SignIn />} />
-          <Route path='/room' element={<Room />} />
+          <Route path='/rooms/sign-in' element={<SignIn />} />
+          <Route path='/rooms/:id' element={<Room />} />
           <Route path='/docs' element={<TemplateDocs />} />
         </Routes>
       </AuthContextProvider>

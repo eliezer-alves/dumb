@@ -26,7 +26,7 @@ export function Home() {
 
         <button onClick={handleCreateRoom} className="btn btn-primary w-full">Criar nova sala</button>
         <div className="separator">
-          <span onClick={() => { navigate('/sign-in-room') }} className="link">ou entre em uma sala já existente</span>
+          <span onClick={() => { navigate('/rooms/sign-in') }} className="link">ou entre em uma sala já existente</span>
         </div>
       </Main>
     </Page>
