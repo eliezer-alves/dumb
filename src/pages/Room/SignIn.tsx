@@ -17,7 +17,6 @@ export function SignIn() {
       await signInWithGoogle();
     }
 
-
 		if (roomCode.trim() === '') {
 			return;
 		}
