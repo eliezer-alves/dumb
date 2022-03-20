@@ -6,7 +6,7 @@ import { Main } from "../../components/Page/Main";
 import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
-  const { user, signInWithGoogle } = useAuth();
+  const { user, signInWithGoogle, handleNavigate } = useAuth();
   const navigate = useNavigate();
 	const [roomCode, setRoomCode] = useState('');
 
@@ -33,7 +33,7 @@ export function SignIn() {
 			return
 		}
 
-		navigate(`/rooms/${roomCode}`);
+		handleNavigate(`/rooms/${roomCode}`);
 	}
 
   return (
