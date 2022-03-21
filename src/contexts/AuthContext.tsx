@@ -54,7 +54,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     database.ref(`users/${uid}`).on('value', user => {
       const dataUser = user.val()
-			console.log(dataUser);
 
 			if (!dataUser) {
 				handleCreateUser(firebaseUserObject)
