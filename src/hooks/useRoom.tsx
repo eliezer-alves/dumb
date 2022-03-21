@@ -8,14 +8,16 @@ export function useRoom(roomCode: string) {
   const [code, setCode] = useState('')
 
   useEffect(() => {
-    // database.ref(`rooms/${roomCode}/users`).push({
-    //   id: user?.id,
-    // })
+    if (!user) return
+
+    database.ref(`rooms/${roomCode}/users`).child(user.id).set({})
 
     const roomRef = database.ref(`rooms/${roomCode}`)    
 
     roomRef.on('value', room => {
       const dataRoom = room.val()
+      console.log(dataRoom);
+      
       if (dataRoom) {
         setName(dataRoom.name)
         setCode(roomCode)

@@ -52,8 +52,9 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 			throw new Error('Missing information from Google Account.');
 		}
 
-    database.ref("users").orderByChild("id").equalTo(uid).on('value', user => {
+    database.ref(`users/${uid}`).on('value', user => {
       const dataUser = user.val()
+			console.log(dataUser);
 
 			if (!dataUser) {
 				handleCreateUser(firebaseUserObject)
@@ -65,7 +66,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
 	async function handleCreateUser(user: User) {
 		const userRef = database.ref('users')
-		const firebaseUser = await userRef.push(user)
+		const firebaseUser = await userRef.child(user.id).set(user)
 
 		return firebaseUser
 	}
