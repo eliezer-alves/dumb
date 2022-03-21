@@ -13,9 +13,13 @@ export function Room() {
 
   return (
     <Page>
-      <div className="flex-col-center gap-4">
-      <h2>Bem vindo a sala <strong>{name}</strong></h2>
-      <Table content={'My table'} />
+      <div className="w-full h-full flex flex-col">
+        <div className="w-full h-1/10 flex items-center">
+          <h3 className="font-semibold ml-40">sala {name}</h3>
+        </div>
+        <div className="w-full h-9/10 flex-center">
+          <Table content={'My table'} />
+        </div>
       </div>
     </Page>
   )

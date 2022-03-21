@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { firebase, auth } from '../services/firebase';
+import { database } from '../services/firebase'
 
 type User = {
 	id: string;
@@ -25,19 +26,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 	const navigate = useNavigate()
 	const [user, setUser] = useState<User>()
 
-	const handleSetUser = (firebaseUser: any) => {
-		const { displayName, photoURL, uid } = firebaseUser;
-
-		if (!displayName || !photoURL) {
-			throw new Error('Missing information from Google Account.');
-		}
-
-		setUser({
-			id: uid,
-			name: displayName,
-			avatar: photoURL
-		});
-	}
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
@@ -49,15 +37,47 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 		return () => {
 			unsubscribe();
 		}
-	}, []);	
+	}, []);
+
+	function handleSetUser(firebaseUser: any) {
+		
+		const { displayName, photoURL, uid } = firebaseUser;
+		const firebaseUserObject = {
+			id: uid,
+			name: displayName,
+			avatar: photoURL
+		}
+
+		if (!displayName || !photoURL) {
+			throw new Error('Missing information from Google Account.');
+		}
+
+    database.ref("users").orderByChild("id").equalTo(uid).on('value', user => {
+      const dataUser = user.val()
+
+			if (!dataUser) {
+				handleCreateUser(firebaseUserObject)
+			}
+    })
+
+		setUser(firebaseUserObject)
+	}
+
+	async function handleCreateUser(user: User) {
+		const userRef = database.ref('users')
+		const firebaseUser = await userRef.push(user)
+
+		return firebaseUser
+	}
 
 	async function signInWithGoogle() {
-		const provider = new firebase.auth.GoogleAuthProvider();
+		const provider = new firebase.auth.GoogleAuthProvider()
 
 		const result = await auth.signInWithPopup(provider)
 
-		if (result.user) {
+		if (result.user) {			
 			handleSetUser(result.user)
+			
 		}
 	}
 

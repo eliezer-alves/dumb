@@ -17,7 +17,7 @@ export function TopBar() {
   const { name, code } = useRoom(roomCode);  
 
   return (
-    <div className="w-full h-1/6 py-4 px-12 flex-between">
+    <div className="w-full h-1/6 py-2 px-12 flex-between">
       <Logo />
       <div className="flex-center gap-4 divide-x-2">
         {code && <RoomCode code={code} />}

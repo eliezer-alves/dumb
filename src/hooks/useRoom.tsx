@@ -8,7 +8,11 @@ export function useRoom(roomCode: string) {
   const [code, setCode] = useState('')
 
   useEffect(() => {
-    const roomRef = database.ref(`rooms/${roomCode}`)
+    // database.ref(`rooms/${roomCode}/users`).push({
+    //   id: user?.id,
+    // })
+
+    const roomRef = database.ref(`rooms/${roomCode}`)    
 
     roomRef.on('value', room => {
       const dataRoom = room.val()
