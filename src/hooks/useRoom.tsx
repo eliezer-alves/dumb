@@ -32,13 +32,13 @@ export function useRoom(roomCode: string) {
       if (dataRoom) {
         setName(dataRoom.name)
         setCode(roomCode)
+        setUsersRoom([])
         
         Object.entries(dataRoom.users).map(([key, value]) => {          
           handleUserRoom(key)
         });
       }
-    })
-    
+    })    
   
     return () => {}
   }, [roomCode, user?.id])

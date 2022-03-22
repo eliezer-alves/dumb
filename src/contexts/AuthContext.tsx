@@ -92,6 +92,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 	}
 
 	function handleNavigate(service: string) {
+		
 		if (!user) {
 			navigate(`/${service}`)
 		}

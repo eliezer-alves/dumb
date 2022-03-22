@@ -33,7 +33,7 @@ export function SignIn() {
 			return
 		}
 
-		handleNavigate(`/rooms/${roomCode}`);
+		navigate(`/rooms/${roomCode}`);
 	}
 
   return (
