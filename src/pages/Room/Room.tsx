@@ -10,7 +10,6 @@ export function Room() {
   const params = useParams<RoomParams>();
   const roomCode = params.id ?? '';
   const { name, code, usersRoom} = useRoom(roomCode);
-  console.log(usersRoom)
 
   return (
     <Page>
