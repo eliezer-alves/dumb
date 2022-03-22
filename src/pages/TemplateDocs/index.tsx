@@ -1,3 +1,4 @@
+import { Teste } from "../../components/Modals/Teste";
 import { Body } from "../../components/Page/Body";
 import { Main } from "../../components/Page/Main";
 import { ThemeColors } from "../../components/ThemeColors";

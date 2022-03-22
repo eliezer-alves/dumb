@@ -17,6 +17,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  @apply z-0 static
+}
+
 textarea:focus, input:focus, select:focus {
   outline: 0;
 } 
