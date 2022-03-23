@@ -51,11 +51,15 @@ export function useRoom(roomCode: string) {
           ...usersRoom,
         ]
       });
-      
-
     })    
+  }
+
+  function createTask(title: string) {
+    database.ref(`rooms/${roomCode}/tasks`).push({
+      title: title,
+    })
   }
   
 
-  return {name, code, usersRoom}
+  return {name, code, usersRoom, createTask}
 }
