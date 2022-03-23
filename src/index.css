@@ -40,11 +40,20 @@ h3 {
 }
 
 input {
-  @apply m-1 py-3 px-6 border-3 rounded-md
+  @apply m-1 py-3 px-6
+  border-3 rounded-md
   text-xl
   border-gray-200
   hover:border-gray-400
   focus:border-primary-400
+  duration-200 ease-in-out
+}
+
+textarea {
+  @apply m-1 py-3 px-6
+  bg-gray-200
+  border-3 rounded-md
+  text-xl
   duration-200 ease-in-out
 }
 
@@ -71,7 +80,7 @@ input {
 }
 
 .btn-primary {
-  @apply bg-primary-400 text-white border-0
+  @apply bg-primary-300 text-white border-0
 }
 
 .btn-dark {

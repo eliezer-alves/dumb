@@ -3,7 +3,6 @@ import fileIcom from './images/file-icon.svg'
 
 export function ButtonShowTasks() {
   const { showModal, setShowModal } = useModals()
-  console.log(showModal)
   
   return (
     <div

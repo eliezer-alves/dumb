@@ -1,4 +1,5 @@
 import { useModals } from '../../hooks/useModals'
+import NewTask from '../NewTask'
 import closeIcon from './images/close-icon.svg'
 import { Modal } from "./Modal"
 
@@ -8,8 +9,8 @@ export function TasksSideBar() {
   return (
     <Modal>
       <div className="w-full h-full flex justify-end">
-        <div className="h-full min-w-1/3 flex flex-col justify-between px-10 py-10 bg-gray-50">
-          <div className="flex items-center justify-between">
+        <div className="h-full min-w-1/3 px-10 py-10 flex flex-col justify-start gap-4 bg-gray-50">
+          <div className="mb-4 flex items-center justify-between">
             <h2>Tarefas</h2>
             <img
               onClick={() => {setShowModal(false)}}
@@ -18,6 +19,7 @@ export function TasksSideBar() {
               alt="Fechar barra de tarefas"
               className="p-1 link rounded-full hover:bg-gray-200" />
           </div>
+          <NewTask/>
         </div>
       </div>
     </Modal>
