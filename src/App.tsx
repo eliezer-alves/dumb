@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Teste } from "./components/Modals/Teste";
+import { TasksSideBar } from "./components/Modals/TasksSideBar";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { Home } from './pages/Home';
 import { Create, Room, SignIn } from './pages/Room';
@@ -8,7 +8,7 @@ import { TemplateDocs } from "./pages/TemplateDocs";
 function App() {
   return (
     <BrowserRouter>    
-      <Teste/>
+      <TasksSideBar/>
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={<Home />} />
