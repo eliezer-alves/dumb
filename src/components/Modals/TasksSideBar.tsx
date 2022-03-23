@@ -1,5 +1,5 @@
 import closeIcon from './images/close-icon.svg'
-import fileIcon from './images/close-icon.svg'
+
 import { Modal } from "./Modal";
 
 type TasksSideBarProps = {
