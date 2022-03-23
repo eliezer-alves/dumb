@@ -1,4 +1,3 @@
-import { info } from 'console';
 import copyIcon from './images/copy.svg';
 
 type RoomCodeProps = {

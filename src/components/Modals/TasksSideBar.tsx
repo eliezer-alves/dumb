@@ -1,12 +1,10 @@
+import { useModals } from '../../hooks/useModals'
 import closeIcon from './images/close-icon.svg'
+import { Modal } from "./Modal"
 
-import { Modal } from "./Modal";
+export function TasksSideBar() {
+  const { setShowModal } = useModals()
 
-type TasksSideBarProps = {
-  handleShowModal(a: boolean): void;
-}
-
-export function TasksSideBar({handleShowModal}: TasksSideBarProps) {
   return (
     <Modal>
       <div className="w-full h-full flex justify-end">
@@ -14,7 +12,7 @@ export function TasksSideBar({handleShowModal}: TasksSideBarProps) {
           <div className="flex items-center justify-between">
             <h2>Tarefas</h2>
             <img
-              onClick={() => {handleShowModal(false)}}
+              onClick={() => {setShowModal(false)}}
               src={closeIcon}
               width="54px"
               alt="Fechar barra de tarefas"

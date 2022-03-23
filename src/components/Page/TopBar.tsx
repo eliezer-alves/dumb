@@ -22,7 +22,7 @@ export function TopBar() {
       <Logo />
       <div className="flex-center gap-8">
         <div className="flex-center gap-4">
-          {code && <RoomCode code={code} />}
+          { code && <RoomCode code={code} />}
           { code && <ButtonShowTasks /> }
         </div>
         {user && <Profile avatar={user.avatar} name={user.name} />}

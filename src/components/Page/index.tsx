@@ -6,11 +6,11 @@ type BodyProps = {
   children?: ReactNode;
 }
 
-export function Page({children}: BodyProps) { 
+export function Page({ children }: BodyProps) {
   return (
     <div className="h-full flex-col-center">
-      <TopBar/>
-      <Body>{children}</Body>    
+      <TopBar />
+      <Body>{children}</Body>
     </div>
   )
 }
