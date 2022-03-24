@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {useParams } from "react-router-dom"
-import { TasksSideBar } from "../../components/Modals/TasksSideBar"
+import { TaskSideBar } from "../../components/TaskSideBar"
 import { Page } from "../../components/Page"
 import { Table } from "../../components/Table"
 import { useModals } from "../../hooks/useModals"
@@ -18,7 +18,7 @@ export function Room() {
 
   return (
     <>
-    {showModal && <TasksSideBar />}
+    {showModal && <TaksSideBar />}
     <Page>
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-1/12 flex-center">Bem vindo à sala&nbsp;<strong>{name}</strong>!</div>
