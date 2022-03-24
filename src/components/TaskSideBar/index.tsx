@@ -14,7 +14,7 @@ export function TaskSideBar() {
   return (
     <Modal>
       <div className="w-full h-full flex justify-end">
-        <div className="h-full min-w-1/5 flex flex-col justify-start gap-4 bg-gray-50">
+        <div className="h-full min-w-1/5 flex flex-col justify-start bg-gray-50">
           <div className="h-1/12 p-10 flex items-center justify-between">
             <h2>Tarefas</h2>
             <img
@@ -24,10 +24,10 @@ export function TaskSideBar() {
               alt="Fechar barra de tarefas"
               className="p-1 link rounded-full hover:bg-gray-200" />
           </div>
-          <div className="h-3/5 px-5 py-5 overflow-y-scroll">
+          <div className="px-5 pb-2 overflow-y-auto">
             <TaskList />
           </div>
-          <div className="px-5">
+          <div className="h-1/3 pl-4 pr-6 pt-4 pb-8">
             <NewTask/>
           </div>
         </div>

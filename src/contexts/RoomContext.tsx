@@ -12,18 +12,11 @@ type User = {
 // type FaribaseUsersRoom = Record<string, {name: string}>
 
 type Task = {
+  id: string;
   title: string;
 }
 
 type FaribaseTasks = Record<string, Task>
-
-type RoomContextType = {
-  name: string;
-  code: string;
-  usersRoom: User[];
-  tasks: Task[];
-  createTask(title:string): void;
-}
 
 type RoomContextProviderProps = {
   children: ReactNode
@@ -32,6 +25,16 @@ type RoomContextProviderProps = {
 type RoomParams = {
   id: string;
 }
+
+type RoomContextType = {
+  name: string;
+  code: string;
+  usersRoom: User[];
+  tasks: Task[];
+  createTask(title:string): void;
+  deleteTask(taskId:string): void;
+}
+
 export const RoomContext = createContext({} as RoomContextType)
 
 export function RoomContextProvider({ children }: RoomContextProviderProps) {  
@@ -94,14 +97,20 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     })    
   }
 
-  function createTask(title: string) {
+  const createTask = (title: string) => {
     database.ref(`rooms/${roomCode}/tasks`).push({
       title: title,
     })
   }
 
+  const deleteTask = (taskId: string) => {
+    database.ref(`rooms/${roomCode}/tasks/${taskId}`).remove()
+  }
+
+
+
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, createTask}}>
+    <RoomContext.Provider value={{name, code, usersRoom, tasks, createTask, deleteTask}}>
       {children}
     </RoomContext.Provider>
   )
