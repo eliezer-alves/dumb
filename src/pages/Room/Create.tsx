@@ -43,7 +43,7 @@ export function Create() {
             placeholder="digite um nome para essa sala"
             className="w-full"
           />
-          <button type="submit" className="btn btn-primary w-full">Criar sala</button>
+          <button type="submit" className="btn btn-primary w-full">&emsp;Criar sala&emsp;</button>
         </form>
         <div className="separator">
           <span onClick={() => { navigate('/rooms/sign-in') }} className="link">ou entrar numa sala existente</span>

@@ -8,33 +8,33 @@ import { useAuth } from "../../hooks/useAuth";
 export function SignIn() {
   const { user, signInWithGoogle, handleNavigate } = useAuth();
   const navigate = useNavigate();
-	const [roomCode, setRoomCode] = useState('');
+  const [roomCode, setRoomCode] = useState('');
 
   async function handleJoinRoom(e: FormEvent) {
-		e.preventDefault();
+    e.preventDefault();
 
     if (!user) {
       await signInWithGoogle();
     }
 
-		if (roomCode.trim() === '') {
-			return;
-		}
+    if (roomCode.trim() === '') {
+      return;
+    }
 
-		const roomRef = await database.ref(`rooms/${roomCode}`).get();
+    const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
-		if (!roomRef.exists()) {
-			alert('Room does not exixsts.');
-			return
-		}
+    if (!roomRef.exists()) {
+      alert('Room does not exixsts.');
+      return
+    }
 
-		if (roomRef.val().endedAt) {
-			alert('Room already closed.');
-			return
-		}
+    if (roomRef.val().endedAt) {
+      alert('Room already closed.');
+      return
+    }
 
-		navigate(`/rooms/${roomCode}`);
-	}
+    navigate(`/rooms/${roomCode}`);
+  }
 
   return (
     <Page>
@@ -49,7 +49,7 @@ export function SignIn() {
             className="w-full"
           />
           <button type="submit" className="btn btn-primary w-full">Entrar na sala</button>
-          </form>
+        </form>
         <div className="separator">
           <span onClick={() => { navigate('/rooms/new') }} className="link">quero criar um nova sala</span>
         </div>
