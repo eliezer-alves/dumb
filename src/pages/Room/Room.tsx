@@ -18,7 +18,7 @@ export function Room() {
 
   return (
     <>
-    {showModal && <TaksSideBar />}
+    {showModal && <TaskSideBar />}
     <Page>
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-1/12 flex-center">Bem vindo à sala&nbsp;<strong>{name}</strong>!</div>
