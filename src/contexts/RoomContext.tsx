@@ -31,8 +31,10 @@ type RoomContextType = {
   code: string;
   usersRoom: User[];
   tasks: Task[];
+  taskVote: Task|undefined;
   createTask(title:string): void;
   deleteTask(taskId:string): void;
+  setTaskVote(task:Task|undefined): void;
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -46,6 +48,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const [code, setCode] = useState('')
   const [usersRoom, setUsersRoom] = useState<User[]>([])
   const [tasks, setTasks] = useState<Task[]>([])
+  const [taskVote, setTaskVote] = useState<Task|undefined>()
 
   useEffect(() => {
     if (!user) return    
@@ -110,7 +113,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
 
 
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, createTask, deleteTask}}>
+    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskVote, createTask, deleteTask, setTaskVote}}>
       {children}
     </RoomContext.Provider>
   )

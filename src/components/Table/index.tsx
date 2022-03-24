@@ -1,13 +1,13 @@
 import { ReactNode } from "react"
 
 type TableProps = {
-  content: string;
+  children: ReactNode;
 }
 
-export function Table({ content }: TableProps) {
+export function Table({ children }: TableProps){
   return (
-    <div className="w-1/2 p-8 rounded-lg bg-primary-100 flex-center">
-      {content}
+    <div className="w-1/3 h-40 p-12 rounded-lg bg-primary-100 flex-center">
+      {children}
     </div>
   )
 }

@@ -2,7 +2,8 @@ import { useRoom } from "../../hooks/useRoom"
 import binIcon from './images/bin-icon.svg'
 
 export function TaskList() {
-  const { tasks, deleteTask } = useRoom()
+  const { tasks, taskVote, deleteTask, setTaskVote } = useRoom()
+  
   return (
     <div className="w-full flex-col-center gap-4">
       {
@@ -14,7 +15,11 @@ export function TaskList() {
               </div>              
               <h3 className="mb-6">{task.title}</h3>
               <div className="w-full flex items-center justify-between">
-                <button className="btn-sm btn-secondary text-sm font-sans w-24">votar</button>
+                {(task.id == taskVote?.id)
+                  ? <button onClick={() => setTaskVote(undefined)} className="btn-sm btn-primary text-sm font-sans w-24">retirar</button>
+                  : <button onClick={() => setTaskVote(task)} className="btn-sm btn-secondary text-sm font-sans w-24">votar</button>
+                }
+                
                 <span className="btn-sm btn-secondary text-sm font-sans">0</span>
               </div>
             </div>

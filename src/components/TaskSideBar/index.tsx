@@ -9,8 +9,6 @@ export function TaskSideBar() {
   const { tasks } = useRoom()
   const { setShowModal } = useModals()
 
-  console.log(tasks);  
-
   return (
     <Modal>
       <div className="w-full h-full flex justify-end">
