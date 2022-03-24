@@ -1,14 +1,9 @@
 import { FormEvent, useState } from "react"
-import { useParams } from "react-router-dom"
-import { useRoom } from "../../hooks/useRoom"
+import { useRoom } from "../../hooks/useRoom";
 
-type RoomParams = {
-  id: string;
-}
+
 export default function NewTask() {
-  const params = useParams<RoomParams>()
-  const roomCode = params.id ?? ''
-  const { createTask } = useRoom(roomCode)
+  const { createTask } = useRoom()
   const [taskName, setTaskName] = useState('')
 
   const handleCreateTask = (e: FormEvent) => {

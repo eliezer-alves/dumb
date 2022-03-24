@@ -1,22 +1,14 @@
-import { useParams } from 'react-router-dom'
 import { useModals } from '../../hooks/useModals'
-import { useTask } from '../../hooks/useTask'
 import NewTask from '../NewTask'
 import closeIcon from './images/close-icon.svg'
 import { Modal } from "../BaseModal"
-
-type RoomParams = {
-  id: string;
-}
+import { useRoom } from '../../hooks/useRoom'
 
 export function TaskSideBar() {
-  const params = useParams<RoomParams>()
-  const roomCode = params.id ?? ''
-  const { tasks } = useTask(roomCode)
+  const { tasks } = useRoom()
   const { setShowModal } = useModals()
 
-  console.log(tasks);
-  
+  console.log(tasks);  
 
   return (
     <Modal>
