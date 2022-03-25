@@ -19,8 +19,8 @@ export function Deck() {
                 'text-2xl text-primary-300 font-semibold',
                 'hover:cursor-pointer',
                 'duration-200 ease-out',
-                {'bg-primary-300 text-white mb-10': (card == selectedCard)},
-                {'hover:mb-5 hover:bg-primary-50': card != selectedCard}
+                {'bg-primary-300 text-white mb-6': (card == selectedCard)},
+                {'hover:mb-3 hover:bg-primary-50': card != selectedCard}
               )}>
               {card}
             </div>

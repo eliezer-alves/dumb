@@ -16,7 +16,7 @@ export function Room() {
     <Page>
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-1/12 flex-center">Bem vindo à sala&nbsp;<strong>{name}</strong>!</div>
-        <div className="w-full h-11/12 py-10 flex flex-col items-center justify-between">
+        <div className="w-full h-11/12 pt-10 flex flex-col items-center justify-between">
           <div className="w-full flex-center gap-4">
             {usersRoom.map(user => {
               return (              
