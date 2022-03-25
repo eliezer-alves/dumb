@@ -39,7 +39,7 @@ export function Room() {
                 {'btn btn-primary': taskToVote},
                 {'btn btn-secondary border-3 text-gray-500 hover:cursor-no-drop': !taskToVote},
             )}
-          >&emsp;Finalizar Votação&emsp;</button>
+          >&emsp;Encerrar a rodada&emsp;</button>
           <Deck />
         </div>
       </div>
