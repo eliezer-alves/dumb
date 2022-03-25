@@ -3,7 +3,7 @@ import binIcon from './images/bin-icon.svg'
 import cx from 'classnames';
 
 export function TaskList() {
-  const { tasks, taskToVote, deleteTask, setTaskToVote } = useRoom()
+  const { tasks, taskToVote, deleteTask, handleTaskToVote } = useRoom()
   
   return (
     <div className="w-full flex-col-center gap-4">
@@ -20,8 +20,8 @@ export function TaskList() {
               <h3 className="mb-6">{task.title}</h3>
               <div className="w-full flex items-center justify-between">
                 {(task.id == taskToVote?.id)
-                  ? <button onClick={() => setTaskToVote(undefined)} className="btn-sm btn-primary text-sm font-sans w-24">retirar</button>
-                  : <button onClick={() => setTaskToVote(task)} className="btn-sm btn-secondary text-sm font-sans w-24">votar</button>
+                  ? <button onClick={() => handleTaskToVote(undefined)} className="btn-sm btn-primary text-sm font-sans w-24">retirar</button>
+                  : <button onClick={() => handleTaskToVote(task)} className="btn-sm btn-secondary text-sm font-sans w-24">votar</button>
                 }
                 
                 <span className="btn-sm btn-secondary text-sm font-sans">{task.average}</span>

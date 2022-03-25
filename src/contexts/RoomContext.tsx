@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth"
 import { database } from '../services/firebase'
 
-type User = {
+type UserRoom = {
 	id: string
 	name: string
 	avatar: string
 }
+
+type FaribaseUsersRoom = Record<string, UserRoom>
 
 // type FaribaseUsersRoom = Record<string, {name: string}>
 type Vote = {
@@ -19,13 +21,23 @@ type FaribaseTaskVotes = Record<string, Vote>
 type Task = {
   id: string
   title: string
+  votes: any
+  numberOfVotes: number|undefined
+  sumOfVotes: number|undefined
+  average: number|undefined
+}
+
+type FaribaseTask = {
+  id: string
+  title: string
   votes: FaribaseTaskVotes|undefined
   numberOfVotes: number|undefined
   sumOfVotes: number|undefined
   average: number|undefined
 }
 
-type FaribaseTasks = Record<string, Task>
+
+type FaribaseTasks = Record<string, FaribaseTask>
 
 
 type RoomContextProviderProps = {
@@ -39,13 +51,14 @@ type RoomParams = {
 type RoomContextType = {
   name: string
   code: string
-  usersRoom: User[]
+  usersRoom: UserRoom[]
   tasks: Task[]
   taskToVote: Task|undefined
   createTask(title:string): void
   deleteTask(taskId:string): void
-  setTaskToVote(task:Task|undefined): void
-  handleTaskVote(value: number, taskId: string): void
+  handleTaskToVote(task:Task|undefined): void
+  handleVote(value: number, taskId: string): void
+
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -57,18 +70,17 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   
   const [name, setName] = useState('')
   const [code, setCode] = useState('')
-  const [usersRoom, setUsersRoom] = useState<User[]>([])
+  const [usersRoom, setUsersRoom] = useState<UserRoom[]>([])
   const [tasks, setTasks] = useState<Task[]>([])
   const [taskToVote, setTaskToVote] = useState<Task|undefined>()
+  const [taskVote, setTaskVote] = useState<Vote|undefined>()
 
   useEffect(() => {
     if (!user) return    
 
     database.ref(`rooms/${roomCode}/users/${user.id}`).on('value', userRoom => {
       if (!userRoom.val()) {
-        database.ref(`rooms/${roomCode}/users`).child(user.id).set({
-          name: user.name,
-        })
+        database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
       }      
     })
 
@@ -79,10 +91,19 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
       if (dataRoom) {
         setName(dataRoom.name)
         setCode(roomCode)
+        setTaskToVote(dataRoom.taskToVote)
         setUsersRoom([])
         
-        Object.entries(dataRoom.users).map(([key, value]) => {          
-          handleUserRoom(key)
+        const faribaseUsersRoom:FaribaseUsersRoom = dataRoom.users
+        Object.entries(faribaseUsersRoom).map(([key, value]) => {
+
+          setUsersRoom((usersRoom:UserRoom[]) => {
+            return [
+              value,
+              ...usersRoom,
+            ]
+          })
+          
         })
 
         const faribaseTasks: FaribaseTasks = dataRoom.tasks ?? {}
@@ -119,16 +140,6 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     return () => {}
   }, [roomCode, user?.id])
 
-  function handleUserRoom(userId: string) {
-    database.ref(`users/${userId}`).on('value', user => {
-      setUsersRoom((usersRoom:User[]) => {
-        return [
-          user.val(),
-          ...usersRoom,
-        ]
-      })
-    })    
-  }
 
   const createTask = (title: string) => {
     database.ref(`rooms/${roomCode}/tasks`).push({
@@ -140,7 +151,14 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     database.ref(`rooms/${roomCode}/tasks/${taskId}`).remove()
   }
 
-  const handleTaskVote = (value:number, taskId: string) => {
+  const handleTaskToVote = (task:Task) => {
+    task.votes = 0
+    
+    database.ref(`rooms/${roomCode}`).child('taskToVote').set(task ?? {})
+    
+  }
+
+  const handleVote = (value:number, taskId: string) => {
     if (!user) return
     
     const taskVotesRef = database.ref(`rooms/${roomCode}/tasks/${taskId}/votes`)
@@ -150,7 +168,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   }
 
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, setTaskToVote, handleTaskVote}}>
+    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, handleVote, handleTaskToVote}}>
       {children}
     </RoomContext.Provider>
   )
