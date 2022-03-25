@@ -24,7 +24,7 @@ export function TaskList() {
                   : <button onClick={() => setTaskToVote(task)} className="btn-sm btn-secondary text-sm font-sans w-24">votar</button>
                 }
                 
-                <span className="btn-sm btn-secondary text-sm font-sans">0</span>
+                <span className="btn-sm btn-secondary text-sm font-sans">{task.average}</span>
               </div>
             </div>
           )

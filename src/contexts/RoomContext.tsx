@@ -1,46 +1,51 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { createContext, ReactNode, useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth"
 import { database } from '../services/firebase'
 
 type User = {
-	id: string;
-	name: string;
-	avatar: string;
+	id: string
+	name: string
+	avatar: string
 }
 
 // type FaribaseUsersRoom = Record<string, {name: string}>
-
-type Task = {
-  id: string;
-  title: string;
+type Vote = {
+  value: number
 }
 
-type voteOfTask = {
-  authorId: string;
-  vote: number;
+type FaribaseTaskVotes = Record<string, Vote>
+
+type Task = {
+  id: string
+  title: string
+  votes: FaribaseTaskVotes|undefined
+  numberOfVotes: number|undefined
+  sumOfVotes: number|undefined
+  average: number|undefined
 }
 
 type FaribaseTasks = Record<string, Task>
+
 
 type RoomContextProviderProps = {
   children: ReactNode
 }
 
 type RoomParams = {
-  id: string;
+  id: string
 }
 
 type RoomContextType = {
-  name: string;
-  code: string;
-  usersRoom: User[];
-  tasks: Task[];
-  taskToVote: Task|undefined;
-  createTask(title:string): void;
-  deleteTask(taskId:string): void;
-  setTaskToVote(task:Task|undefined): void;
-  handleTaskVote(value: number, taskId: string): void;
+  name: string
+  code: string
+  usersRoom: User[]
+  tasks: Task[]
+  taskToVote: Task|undefined
+  createTask(title:string): void
+  deleteTask(taskId:string): void
+  setTaskToVote(task:Task|undefined): void
+  handleTaskVote(value: number, taskId: string): void
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -78,16 +83,35 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
         
         Object.entries(dataRoom.users).map(([key, value]) => {          
           handleUserRoom(key)
-        });
+        })
 
         const faribaseTasks: FaribaseTasks = dataRoom.tasks ?? {}
         const parsedTasks = Object.entries(faribaseTasks).map(([key, value]) => {
+          
+          var sumOfVotes = 0
+          var numberOfVotes = 0
+          var average = 0
+
+          if (value.votes){
+            const faribaseTaskVotes: FaribaseTaskVotes = value.votes ?? {}
+            const parsedVotes = Object.entries(faribaseTaskVotes).map(([key, value]) => {
+              sumOfVotes += value.value            
+            })
+
+            numberOfVotes = parsedVotes.length
+            average = Math.round(sumOfVotes/numberOfVotes)
+          }
+          
           return {
             id: key,
             title: value.title,
+            votes: undefined,
+            numberOfVotes: numberOfVotes,
+            sumOfVotes: sumOfVotes,
+            average: average,
           }
         })
-        setTasks(parsedTasks);
+        setTasks(parsedTasks)
 
       }
     })    
@@ -102,7 +126,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
           user.val(),
           ...usersRoom,
         ]
-      });
+      })
     })    
   }
 
