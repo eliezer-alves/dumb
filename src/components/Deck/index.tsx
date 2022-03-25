@@ -6,7 +6,7 @@ export function Deck() {
   const [selectedCard, setSelectedCard] = useState<number|undefined>()
 
   return (
-    <div className="h-32 flex-center gap-4">
+    <div className="h-40 flex-center gap-3">
       {
         cards.map(card =>{
           return (
@@ -18,9 +18,9 @@ export function Deck() {
                 'border-2 border-primary-300 rounded-md',
                 'text-2xl text-primary-300 font-semibold',
                 'hover:cursor-pointer',
-                'duration-200 ease-in-out',
-                {'bg-primary-300 text-white mb-6': (card == selectedCard)},
-                {'hover:mb-4 hover:bg-primary-50': card != selectedCard}
+                'duration-200 ease-out',
+                {'bg-primary-300 text-white mb-10': (card == selectedCard)},
+                {'hover:mb-5 hover:bg-primary-50': card != selectedCard}
               )}>
               {card}
             </div>
