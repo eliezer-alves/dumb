@@ -5,8 +5,10 @@ import { useModals } from "../../hooks/useModals"
 import { useRoom } from "../../hooks/useRoom"
 import { Deck } from "../../components/Deck"
 
+import cx from 'classnames';
+
 export function Room() {
-  const { name, usersRoom, taskToVote} = useRoom()
+  const { name, usersRoom, taskToVote, handleCloseVote} = useRoom()
   const { showModal } = useModals()
   
 
@@ -30,6 +32,14 @@ export function Room() {
               : <span>Nenhuma tarefa sendo votada no momento</span>
             }
           </Table>
+          <button
+            onClick={handleCloseVote}
+            type="submit"
+            className={cx(
+                {'btn btn-primary': taskToVote},
+                {'btn btn-secondary border-3 text-gray-500 hover:cursor-no-drop': !taskToVote},
+            )}
+          >&emsp;Finalizar Votação&emsp;</button>
           <Deck />
         </div>
       </div>

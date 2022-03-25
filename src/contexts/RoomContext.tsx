@@ -57,8 +57,8 @@ type RoomContextType = {
   createTask(title:string): void
   deleteTask(taskId:string): void
   handleTaskToVote(task:Task|undefined): void
-  handleVote(value: number, taskId: string): void
-
+  handleVotingIntention(value: number): void
+  handleCloseVote(): void
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -151,24 +151,36 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     database.ref(`rooms/${roomCode}/tasks/${taskId}`).remove()
   }
 
-  const handleTaskToVote = (task:Task) => {
+  const handleTaskToVote = (task:Task|undefined) => {
+    if (!task) {
+      database.ref(`rooms/${roomCode}/taskToVote`).remove()
+      return
+    }
+    
     task.votes = 0
     
     database.ref(`rooms/${roomCode}`).child('taskToVote').set(task ?? {})
     
   }
 
-  const handleVote = (value:number, taskId: string) => {
-    if (!user) return
+  const handleVotingIntention = (value:number) => {
+    if (!user || !taskToVote) return
     
-    const taskVotesRef = database.ref(`rooms/${roomCode}/tasks/${taskId}/votes`)
+    const taskVotesRef = database.ref(`rooms/${roomCode}/taskToVote/votes`)
     taskVotesRef.child(user.id).set({
       value: value,
     })
   }
 
+  const handleCloseVote = () => {
+    if (!taskToVote) return
+    const taskRef = database.ref(`rooms/${roomCode}/tasks/${taskToVote.id}`)
+    taskRef.set(taskToVote)
+    database.ref(`rooms/${roomCode}/taskToVote`).remove()
+  }
+
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, handleVote, handleTaskToVote}}>
+    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, handleVotingIntention, handleTaskToVote, handleCloseVote}}>
       {children}
     </RoomContext.Provider>
   )
