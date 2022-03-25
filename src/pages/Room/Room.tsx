@@ -6,7 +6,7 @@ import { useRoom } from "../../hooks/useRoom"
 import { Deck } from "../../components/Deck"
 
 export function Room() {
-  const { name, usersRoom, taskVote} = useRoom()
+  const { name, usersRoom, taskToVote} = useRoom()
   const { showModal } = useModals()
   
 
@@ -25,8 +25,8 @@ export function Room() {
             })}
           </div>
           <Table>
-            {taskVote
-              ? (<div className="flex-col-center gap-2">Votando<h2>{taskVote.title}</h2></div>)
+            {taskToVote
+              ? (<div className="flex-col-center gap-2">Votando<h2>{taskToVote.title}</h2></div>)
               : <span>Nenhuma tarefa sendo votada no momento</span>
             }
           </Table>

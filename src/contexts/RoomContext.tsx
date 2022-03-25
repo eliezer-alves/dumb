@@ -16,6 +16,11 @@ type Task = {
   title: string;
 }
 
+type voteOfTask = {
+  authorId: string;
+  vote: number;
+}
+
 type FaribaseTasks = Record<string, Task>
 
 type RoomContextProviderProps = {
@@ -31,10 +36,11 @@ type RoomContextType = {
   code: string;
   usersRoom: User[];
   tasks: Task[];
-  taskVote: Task|undefined;
+  taskToVote: Task|undefined;
   createTask(title:string): void;
   deleteTask(taskId:string): void;
-  setTaskVote(task:Task|undefined): void;
+  setTaskToVote(task:Task|undefined): void;
+  handleTaskVote(value: number, taskId: string): void;
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -48,7 +54,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const [code, setCode] = useState('')
   const [usersRoom, setUsersRoom] = useState<User[]>([])
   const [tasks, setTasks] = useState<Task[]>([])
-  const [taskVote, setTaskVote] = useState<Task|undefined>()
+  const [taskToVote, setTaskToVote] = useState<Task|undefined>()
 
   useEffect(() => {
     if (!user) return    
@@ -110,10 +116,17 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     database.ref(`rooms/${roomCode}/tasks/${taskId}`).remove()
   }
 
-
+  const handleTaskVote = (value:number, taskId: string) => {
+    if (!user) return
+    
+    const taskVotesRef = database.ref(`rooms/${roomCode}/tasks/${taskId}/votes`)
+    taskVotesRef.child(user.id).set({
+      value: value,
+    })
+  }
 
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskVote, createTask, deleteTask, setTaskVote}}>
+    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, setTaskToVote, handleTaskVote}}>
       {children}
     </RoomContext.Provider>
   )
