@@ -46,13 +46,12 @@ export function SignIn() {
             placeholder="digite o código da sala"
             onChange={e => setRoomCode(e.target.value)}
             value={roomCode}
-            className="w-full"
+            className="w-full mb-2"
           />
           <button type="submit" className="btn btn-primary w-full">Entrar na sala</button>
         </form>
-        <div className="separator">
-          <span onClick={() => { navigate('/rooms/new') }} className="link">quero criar um nova sala</span>
-        </div>
+        <div className="separator">ou</div>
+        <span onClick={() => { navigate('/rooms/new') }} className="link-span">Criar uma nova sala</span>
       </Main>
     </Page>
   )

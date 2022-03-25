@@ -18,16 +18,17 @@ export function Home() {
 
   return (
     <Page>
-      <div className="h-full w-full px-8 xsm:w-2/3 xsm:px-0 lg:w-3/5 xl:w-2/5 flex flex-col items-center py-10">
-        <div className="flex-col-center mb-14">
+      <div className="h-full w-full px-8 pt-[4%] xsm:w-2/3 xsm:px-0 lg:w-3/5 xl:w-2/5 flex flex-col items-center">
+        <div className="flex-col-center mb-10">
           <h1 className="font-bold text-center mb-10">Scrum Poker para equipes de desenvolvimento ágil</h1>
           <h3>Ferramenta simples para fazer estimativas.</h3>
         </div>
 
         <button onClick={handleCreateRoom} className="btn btn-primary w-2/3">Criar nova sala</button>
         <div className="separator">
-          <span onClick={() => { navigate('/rooms/sign-in') }} className="link">ou entre em uma sala já existente</span>
+          ou          
         </div>
+        <span onClick={() => { navigate('/rooms/sign-in') }} className="link-span">Entrar numa sala já existente</span>
       </div>
     </Page>
   )

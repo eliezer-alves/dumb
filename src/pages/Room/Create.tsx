@@ -41,13 +41,12 @@ export function Create() {
             value={roomName}
             onChange={(e) => {setRoomName(e.target.value)}}
             placeholder="digite um nome para essa sala"
-            className="w-full"
+            className="w-full mb-2"
           />
           <button type="submit" className="btn btn-primary w-full">&emsp;Criar sala&emsp;</button>
         </form>
-        <div className="separator">
-          <span onClick={() => { navigate('/rooms/sign-in') }} className="link">ou entrar numa sala existente</span>
-        </div>
+        <div className="separator">ou</div>
+        <span onClick={() => { navigate('/rooms/sign-in') }} className="link-span">Entrar numa sala existente</span>
       </Main>
     </Page>
   )

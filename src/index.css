@@ -44,8 +44,8 @@ input {
   border-3 rounded-md
   text-xl
   border-gray-200
-  hover:border-gray-400
-  focus:border-primary-400
+  hover:border-gray-300
+  focus:border-primary-300
   duration-200 ease-in-out
 }
 
@@ -111,12 +111,16 @@ textarea {
   duration-200 ease-in-out
 }
 
+.link-span {
+  @apply link text-xl text-gray-500 font-semibold font-fredoka hover:opacity-60
+}
+
 .main {
   @apply w-full xsm:w-2/3 px-8 xsm:px-0 flex-col-center
 }
 
 .separator {
-  @apply my-4 w-2/3 flex-center text-gray-400
+  @apply my-4 w-2/3 flex-center text-gray-400 font-fredoka
 }
 
 .separator::before {
