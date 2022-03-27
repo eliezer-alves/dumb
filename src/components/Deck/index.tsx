@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import cx from 'classnames';
 import { useRoom } from "../../hooks/useRoom";
 
@@ -6,6 +6,15 @@ export function Deck() {
   const { taskToVote, handleVotingIntention } = useRoom()
   const cards = [0,1,2,3,5,8,13,21,34,55,89]
   const [selectedCard, setSelectedCard] = useState<number|undefined>()
+
+  useEffect(() => {
+    if (!taskToVote){
+      setSelectedCard(undefined)
+    }
+  
+    return () => {}
+  }, [taskToVote])
+  
 
   const handleMyVote = (card: any) => {
     if (!taskToVote) return
