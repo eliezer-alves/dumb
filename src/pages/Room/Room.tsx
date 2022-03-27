@@ -10,6 +10,8 @@ import cx from 'classnames';
 export function Room() {
   const { name, usersRoom, taskToVote, handleCloseVote} = useRoom()
   const { showModal } = useModals()
+  console.log(taskToVote);
+  
   
 
   return (

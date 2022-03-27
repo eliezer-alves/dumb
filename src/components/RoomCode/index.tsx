@@ -19,7 +19,7 @@ export function RoomCode(props: RoomCodeProps) {
             ">#{props.code}</span>
             <button
                 className="h-14 px-6 flex-center bg-primary-300
-                border border-l-0 border-primary-300 rounded-r-lg 
+                border border-l-0 border-primary-300 rounded-r-lg
                 active:bg-primary-200
                 duration-200
             ">

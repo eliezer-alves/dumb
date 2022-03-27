@@ -9,14 +9,14 @@ type UserRoom = {
 	avatar: string
 }
 
-type FaribaseUsersRoom = Record<string, UserRoom>
+type FirebaseUsersRoom = Record<string, UserRoom>
 
-// type FaribaseUsersRoom = Record<string, {name: string}>
+// type FirebaseUsersRoom = Record<string, {name: string}>
 type Vote = {
   value: number
 }
 
-type FaribaseTaskVotes = Record<string, Vote>
+type FirebaseTaskVotes = Record<string, Vote>
 
 type Task = {
   id: string
@@ -27,17 +27,17 @@ type Task = {
   average: number|undefined
 }
 
-type FaribaseTask = {
+type FirebaseTask = {
   id: string
   title: string
-  votes: FaribaseTaskVotes|undefined
+  votes: FirebaseTaskVotes|undefined
   numberOfVotes: number|undefined
   sumOfVotes: number|undefined
   average: number|undefined
 }
 
 
-type FaribaseTasks = Record<string, FaribaseTask>
+type FirebaseTasks = Record<string, FirebaseTask>
 
 
 type RoomContextProviderProps = {
@@ -73,7 +73,6 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const [usersRoom, setUsersRoom] = useState<UserRoom[]>([])
   const [tasks, setTasks] = useState<Task[]>([])
   const [taskToVote, setTaskToVote] = useState<Task|undefined>()
-  const [taskVote, setTaskVote] = useState<Vote|undefined>()
 
   useEffect(() => {
     if (!user) return    
@@ -91,11 +90,11 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
       if (dataRoom) {
         setName(dataRoom.name)
         setCode(roomCode)
-        setTaskToVote(dataRoom.taskToVote)
-        setUsersRoom([])
+        setTaskToVote(handleFirebaseTaskVote(dataRoom.taskToVote))        
+        setUsersRoom([])        
         
-        const faribaseUsersRoom:FaribaseUsersRoom = dataRoom.users
-        Object.entries(faribaseUsersRoom).map(([key, value]) => {
+        const firebaseUsersRoom:FirebaseUsersRoom = dataRoom.users
+        Object.entries(firebaseUsersRoom).map(([key, value]) => {
 
           setUsersRoom((usersRoom:UserRoom[]) => {
             return [
@@ -106,32 +105,10 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
           
         })
 
-        const faribaseTasks: FaribaseTasks = dataRoom.tasks ?? {}
-        const parsedTasks = Object.entries(faribaseTasks).map(([key, value]) => {
-          
-          var sumOfVotes = 0
-          var numberOfVotes = 0
-          var average = 0
-
-          if (value.votes){
-            const faribaseTaskVotes: FaribaseTaskVotes = value.votes ?? {}
-            const parsedVotes = Object.entries(faribaseTaskVotes).map(([key, value]) => {
-              sumOfVotes += value.value            
-            })
-
-            numberOfVotes = parsedVotes.length
-            average = Math.round(sumOfVotes/numberOfVotes)
-          }
-          
-          return {
-            id: key,
-            title: value.title,
-            votes: undefined,
-            numberOfVotes: numberOfVotes,
-            sumOfVotes: sumOfVotes,
-            average: average,
-          }
-        })
+        const firebaseTasks: FirebaseTasks = dataRoom.tasks ?? {}
+        const parsedTasks = Object.entries(firebaseTasks).map((task) => {
+          return handleFirebaseTask(task)
+        })        
         setTasks(parsedTasks)
 
       }
@@ -140,6 +117,47 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     return () => {}
   }, [roomCode, user?.id])
 
+  function handleFirebaseTaskVote (task: FirebaseTask | undefined): Task|undefined {
+    if (!task) {
+      return undefined;
+    }
+
+    var sumOfVotes = 0
+    var numberOfVotes = 0
+    var average = 0
+
+    if (task.votes){
+      const firebaseTaskVotes: FirebaseTaskVotes = task.votes ?? {}
+      const parsedVotes = Object.entries(firebaseTaskVotes).map(([key, value]) => {
+        sumOfVotes += value.value            
+      })
+
+      numberOfVotes = parsedVotes.length
+      average = Math.round(sumOfVotes/numberOfVotes)
+    }
+    
+    return {
+      id: task.id,
+      title: task.title,
+      votes: task.votes,
+      numberOfVotes: numberOfVotes,
+      sumOfVotes: sumOfVotes,
+      average: average,
+    }
+  }
+
+  function handleFirebaseTask (task: [string, FirebaseTask]): Task {    
+    const [key, value] = task
+    
+    return {
+      id: key,
+      title: value.title,
+      votes: undefined,
+      numberOfVotes: value.numberOfVotes,
+      sumOfVotes: value.sumOfVotes,
+      average: value.average,
+    }
+  }
 
   const createTask = (title: string) => {
     database.ref(`rooms/${roomCode}/tasks`).push({
