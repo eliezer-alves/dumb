@@ -7,6 +7,7 @@ type UserRoom = {
 	id: string
 	name: string
 	avatar: string
+  voted: boolean
 }
 
 type FirebaseUsersRoom = Record<string, UserRoom>
@@ -117,6 +118,14 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     return () => {}
   }, [roomCode, user?.id])
 
+  useEffect(() => {
+    if (!taskToVote){
+      handleMyVoterStatus(false)
+    }
+
+    return () => {}
+  }, [taskToVote])
+
   function handleFirebaseTaskVote (task: FirebaseTask | undefined): Task|undefined {
     if (!task) {
       return undefined;
@@ -181,13 +190,27 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     
   }
 
+  const handleMyVoterStatus = (status: boolean) => {
+    if (!user) return
+    
+    const userRoomRef = database.ref(`rooms/${roomCode}/users/${user.id}`)
+    userRoomRef.child('voted').set(status)
+  }
+
   const handleVotingIntention = (value:number) => {
     if (!user || !taskToVote) return
     
-    const taskVotesRef = database.ref(`rooms/${roomCode}/taskToVote/votes`)
-    taskVotesRef.child(user.id).set({
-      value: value,
-    })
+    const taskVotesRef = database.ref(`rooms/${roomCode}/taskToVote/votes`)    
+    
+    if (value) {
+      taskVotesRef.child(user.id).set({
+        value: value,
+      })
+      handleMyVoterStatus(true)
+    } else {
+      database.ref(`rooms/${roomCode}/taskToVote/votes/${user.id}`).remove()
+      handleMyVoterStatus(false)
+    }
   }
 
   const handleCloseVote = () => {
