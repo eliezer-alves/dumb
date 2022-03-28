@@ -18,7 +18,7 @@ export function Home() {
 
   return (
     <Page>
-      <div className="h-full w-full px-8 pt-[1%] xsm:w-2/3 xsm:px-0 lg:w-3/5 xl:w-2/5 flex flex-col items-center">
+      <div className="h-full w-full px-8 pt-[4%] xsm:w-2/3 xsm:px-0 lg:w-3/5 xl:w-1/2 flex flex-col items-center">
         <div className="flex-col-center mb-10">
           <h1 className="font-bold text-center mb-10">Scrum Poker para equipes de desenvolvimento ágil</h1>
           <h3>Ferramenta simples para fazer estimativas.</h3>
