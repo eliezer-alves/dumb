@@ -53,8 +53,10 @@ type RoomContextType = {
   name: string
   code: string
   usersRoom: UserRoom[]
+  currentUserRoom: UserRoom|undefined
   tasks: Task[]
   taskToVote: Task|undefined
+  lastVotedTask: Task|undefined
   createTask(title:string): void
   deleteTask(taskId:string): void
   handleTaskToVote(task:Task|undefined): void
@@ -72,8 +74,10 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const [name, setName] = useState('')
   const [code, setCode] = useState('')
   const [usersRoom, setUsersRoom] = useState<UserRoom[]>([])
+  const [currentUserRoom, setCurrentUserRoom] = useState<UserRoom>()
   const [tasks, setTasks] = useState<Task[]>([])
   const [taskToVote, setTaskToVote] = useState<Task|undefined>()
+  const [lastVotedTask, setLastVotedTask] = useState<Task|undefined>()
 
   useEffect(() => {
     if (!user) return    
@@ -92,10 +96,14 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
         setName(dataRoom.name)
         setCode(roomCode)
         setTaskToVote(handleFirebaseTaskVote(dataRoom.taskToVote))        
-        setUsersRoom([])        
+        setLastVotedTask(handleFirebaseTaskVote(dataRoom.lastVotedTask))
+        setUsersRoom([])
         
         const firebaseUsersRoom:FirebaseUsersRoom = dataRoom.users
         Object.entries(firebaseUsersRoom).map(([key, value]) => {
+          if (value.id == user.id) {
+            setCurrentUserRoom(value)
+          }
 
           setUsersRoom((usersRoom:UserRoom[]) => {
             return [
@@ -217,11 +225,12 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     if (!taskToVote) return
     const taskRef = database.ref(`rooms/${roomCode}/tasks/${taskToVote.id}`)
     taskRef.set(taskToVote)
+    database.ref(`rooms/${roomCode}`).child('lastVotedTask').set(taskToVote)
     database.ref(`rooms/${roomCode}/taskToVote`).remove()
   }
 
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, tasks, taskToVote, createTask, deleteTask, handleVotingIntention, handleTaskToVote, handleCloseVote}}>
+    <RoomContext.Provider value={{name, code, usersRoom, currentUserRoom, tasks, taskToVote, lastVotedTask, createTask, deleteTask, handleVotingIntention, handleTaskToVote, handleCloseVote}}>
       {children}
     </RoomContext.Provider>
   )
