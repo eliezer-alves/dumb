@@ -81,12 +81,14 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
 
   useEffect(() => {
     if (!user) return    
-
-    database.ref(`rooms/${roomCode}/users/${user.id}`).on('value', userRoom => {
-      if (!userRoom.val()) {
-        database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
-      }      
-    })
+    database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
+    // database.ref(`rooms/${roomCode}/users/${user.id}`).on('value', userRoom => {
+    //   if (!userRoom.val()) {
+    //     console.log(user);
+        
+    //     database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
+    //   }      
+    // })
 
     const roomRef = database.ref(`rooms/${roomCode}`)
     roomRef.on('value', room => {
@@ -179,6 +181,9 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const createTask = (title: string) => {
     database.ref(`rooms/${roomCode}/tasks`).push({
       title: title,
+      numberOfVotes: 0,
+      sumOfVotes: 0,
+      average: 0,
     })
   }
 

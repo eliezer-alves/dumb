@@ -63,7 +63,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 		setUser(firebaseUserObject)
 	}
 
-	async function handleCreateUser(user: User) {
+	async function handleCreateUser(user: User) {		
 		const userRef = database.ref('users')
 		const firebaseUser = await userRef.child(user.id).set(user)
 
