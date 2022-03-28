@@ -17,9 +17,9 @@ export function UserRoom({ user }: any) {
         <img src={user.avatar} alt="" className="rounded-full w-12 h-12" />
         </div>
       */}
-      <div className="mt-4 flex-center rounded-lg w-16 h-28 bg-gray-300 shadow-lg">
+      <div className="mt-4 flex-center rounded-lg w-14 h-24 bg-gray-300 shadow-lg">
         {user.voted && (
-          <img src={backgroundImg2} alt="" className="rounded-lg w-16 h-28" />
+          <img src={backgroundImg2} alt="" className="rounded-lg w-14 h-24" />
         )}
       </div>
       <div className="flex-center mt-4">

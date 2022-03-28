@@ -87,7 +87,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     //     console.log(user);
         
     //     database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
-    //   }      
+    //   }
     // })
 
     const roomRef = database.ref(`rooms/${roomCode}`)

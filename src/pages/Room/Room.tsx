@@ -22,7 +22,7 @@ export function Room() {
       {showModal && <TaskSideBar />}
       <Page>
         <div className="w-full h-full flex flex-col">
-          <div className="w-full h-full pt-10 flex flex-col items-center justify-between">
+          <div className="w-full h-full flex flex-col items-center justify-between">
             <div className="w-full flex-center gap-8">
               {usersRoom.map((userRoom) => {
                 if (userRoom.id == user?.id) return
