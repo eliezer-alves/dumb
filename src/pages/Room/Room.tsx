@@ -1,17 +1,16 @@
 import { TaskSideBar } from "../../components/TaskSideBar"
 import { Page } from "../../components/Page"
 import { Table } from "../../components/Table"
+import { Deck } from "../../components/Deck"
 import { useModals } from "../../hooks/useModals"
 import { useRoom } from "../../hooks/useRoom"
-import { Deck } from "../../components/Deck"
+import { UserRoom } from "../../components/UserRoom"
 
 import cx from 'classnames';
 
 export function Room() {
   const { name, usersRoom, taskToVote, handleCloseVote} = useRoom()
   const { showModal } = useModals()
-  
-  console.log(usersRoom);
   
 
   return (
@@ -21,10 +20,12 @@ export function Room() {
       <div className="w-full h-full flex flex-col">
         <div className="w-full h-1/12 flex-center">Bem vindo à sala&nbsp;<strong>{name}</strong>!</div>
         <div className="w-full h-11/12 pt-10 flex flex-col items-center justify-between">
-          <div className="w-full flex-center gap-4">
-            {usersRoom.map(user => {
-              return (              
-                <img key={user.id} src={user.avatar} alt="" className="rounded-full w-12 h-12"/>
+          <div className="w-full flex-center gap-8">
+            {usersRoom.map((user) => {
+              console.log(user);
+              
+              return (
+                <UserRoom key={user.id} user={user} />
               )
             })}
           </div>
