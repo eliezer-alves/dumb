@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
+import { TopBar } from "../TopBar";
 import { Body } from "./Body";
-import { TopBar } from "./TopBar";
 
 type BodyProps = {
   children?: ReactNode;
