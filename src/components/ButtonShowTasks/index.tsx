@@ -6,7 +6,7 @@ export function ButtonShowTasks() {
   
   return (
     <div
-      onClick={() => setShowModal(!showModal)}
+      onClick={() => setShowModal(showModal ? '' : false)}
       className="
         h-14 p-2 flex-center
         border-2 border-primary-300 rounded-lg

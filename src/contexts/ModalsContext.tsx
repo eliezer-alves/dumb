@@ -1,8 +1,8 @@
 import { ReactNode, createContext, useState } from "react";
 
 type ModalContextType = {
-  showModal: boolean
-  setShowModal(x: boolean): void
+  showModal: string|boolean
+  setShowModal(idModal: string|boolean): void
 }
 
 type ModalContextProviderProps = {
@@ -12,7 +12,7 @@ type ModalContextProviderProps = {
 export const ModalContext = createContext({} as ModalContextType);
 
 export function ModalContextProvider(props: ModalContextProviderProps) {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState<string|boolean>(false)
   
   return (
 		<ModalContext.Provider value={{ showModal, setShowModal }}>

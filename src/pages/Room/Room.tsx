@@ -4,22 +4,18 @@ import { Table } from "../../components/Table"
 import { Deck } from "../../components/Deck"
 import { UserRoom } from "../../components/UserRoom"
 
-import { useModals } from "../../hooks/useModals"
 import { useRoom } from "../../hooks/useRoom"
 import { useAuth } from "../../hooks/useAuth"
 
 import cx from 'classnames';
-import { useState } from "react"
 
 export function Room() {
   const { user } = useAuth()
-  const { name, usersRoom, currentUserRoom, taskToVote, handleCloseVote } = useRoom()
-  const { showModal } = useModals()
-
+  const { usersRoom, currentUserRoom, taskToVote, handleCloseVote } = useRoom()
 
   return (
     <>
-      {showModal && <TaskSideBar />}
+      <TaskSideBar />
       <Page>
         <div className="w-full h-full flex flex-col">
           <div className="w-full h-full flex flex-col items-center justify-between">

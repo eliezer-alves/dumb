@@ -1,16 +1,14 @@
 import { useModals } from '../../hooks/useModals'
 import NewTask from '../NewTask'
 import closeIcon from './images/close-icon.svg'
-import { Modal } from "../BaseModal"
-import { useRoom } from '../../hooks/useRoom'
+import { Modal } from '../BaseModal'
 import { TaskList } from '../TaskList'
 
 export function TaskSideBar() {
-  const { tasks } = useRoom()
   const { setShowModal } = useModals()
 
   return (
-    <Modal>
+    <Modal id={'tasks'}>
       <div className="modal w-full h-full flex justify-end">
         <div className="modalWindow h-full px-4 flex flex-col justify-start bg-gray-50">
           <div className="h-1/12 p-10 flex items-center justify-between mobile:px-0">
@@ -23,7 +21,7 @@ export function TaskSideBar() {
               className="p-1 link rounded-full hover:bg-gray-200" />
           </div>
           <div className="px-5 pb-2 overflow-y-auto">
-            <TaskList />
+            {/* <TaskList /> */}
           </div>
           <div className="h-1/3 pl-4 pr-6 pt-4 pb-8">
             <NewTask/>

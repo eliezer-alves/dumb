@@ -5,6 +5,7 @@ import { RoomContextProvider } from "./contexts/RoomContext";
 import { Home } from './pages/Home';
 import { Create, Room, SignIn } from './pages/Room';
 import { TemplateDocs } from "./pages/TemplateDocs";
+import { Teste } from "./pages/teste";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
               </RoomContextProvider>
             } />
             <Route path='/docs' element={<TemplateDocs />} />
+            <Route path='/t' element={<Teste />} />
           </Routes>
         </ModalContextProvider>
       </AuthContextProvider>
