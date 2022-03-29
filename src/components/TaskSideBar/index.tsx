@@ -13,7 +13,7 @@ export function TaskSideBar() {
     <Modal>
       <div className="modal w-full h-full flex justify-end">
         <div className="modalWindow h-full px-4 flex flex-col justify-start bg-gray-50">
-          <div className="h-1/12 p-10 flex items-center justify-between">
+          <div className="h-1/12 p-10 flex items-center justify-between mobile:px-0">
             <h2>Tarefas</h2>
             <img
               onClick={() => {setShowModal(false)}}
