@@ -64,6 +64,8 @@ textarea {
   border-3 rounded-md
   text-xl
   duration-200 ease-in-out
+  mobile:text-lg
+  mobile:px-2
 }
 
 /* My custom classes */
