@@ -7,6 +7,7 @@ import closeIcon from './images/close-icon.svg'
 import infoIcon from './images/info-icon.svg'
 import signOutIcon from './images/sign-out-icon.svg'
 import loginIcon from './images/login-icon.svg'
+import gitHubIcon from './images/github-icon.svg'
 
 
 export function SideBar() {
@@ -34,6 +35,10 @@ export function SideBar() {
         <div className="h-14 px-4 flex items-center gap-4">
           <img src={infoIcon} alt="Sair da página" />
           <span className="info">Sobre</span>
+        </div>
+        <div className="h-14 px-4 flex items-center gap-4">
+          <img src={gitHubIcon} alt="Icone GitHub" />
+          <a href="https://github.com/eliezer-alves/dumb" target="blank" className="info">Repositório GitHub</a>
         </div>
         <div className="h-14 px-4 flex items-center gap-4">
           <img src={loginIcon} alt="Sair da página" />
