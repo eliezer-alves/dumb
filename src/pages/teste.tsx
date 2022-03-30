@@ -11,7 +11,9 @@ export function Teste() {
     <Body>
       <Main>
         <button className="btn btn-primary" onClick={() => setShowModal('side-bar')}>show side-bar</button>
-        <button className="btn btn-secondary" onClick={() => setShowModal('tasks')}>show tasks</button>
+        <br />
+        <button className="btn btn-primary" onClick={() => setShowModal('tasks')}>show tasks</button>
+        
         <TaskSideBar />
         <SideBar />
       </Main>
