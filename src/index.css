@@ -27,12 +27,14 @@ textarea:focus, input:focus, select:focus {
 
 h1 {
   @apply text-3xl text-secondary-400 mb-6
-  mobile:text-5xl xsm:text-4xl sm:text-5xl md:text-6xl
+  xsm:text-4xl sm:text-5xl md:text-6xl
+  mobile:text-5xl mobile:text-center
 }
 
 h2 {
   @apply text-xl text-secondary-400
   xsm:text-2xl md:text-3xl
+  mobile:text-center
 }
 
 h3 {

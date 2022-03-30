@@ -10,19 +10,19 @@ export function TaskSideBar() {
   return (
     <Modal id={'tasks'} className="w-full h-full flex justify-end">
       <div className="h-full px-4 flex flex-col justify-start bg-gray-50">
-        <div className="h-1/12 p-10 flex items-center justify-between mobile:px-0">
-          <h2>Tarefas</h2>
+        <div className="min-h-1/12 p-2 flex items-center justify-between mobile:px-0 mobile:py-5">
+          <h2>&nbsp;Tarefas</h2>
           <img
             onClick={() => {setShowModal(false)}}
             src={closeIcon}
-            width="54px"
+            width="44px"
             alt="Fechar barra de tarefas"
             className="p-1 link rounded-full hover:bg-gray-200" />
         </div>
-        <div className="px-5 pb-2 overflow-y-auto">
+        <div className="px-5 pb-2 overflow-y-auto mobile:px-1">
           <TaskList />
         </div>
-        <div className="h-1/3 pl-4 pr-6 pt-4 pb-8">
+        <div className="h-1/3 px-4 pt-4 pb-8 mobile:pl-0 mobile:pr-1">
           <NewTask/>
         </div>
       </div>

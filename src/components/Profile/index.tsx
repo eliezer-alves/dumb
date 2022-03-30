@@ -21,7 +21,7 @@ export function Profile() {
 
   return (
     <div
-      onClick={handleSignOut}
+      // onClick={handleSignOut}
       className="
         h-20 px-4 flex justify-around items-center gap-4 link
         rounded-md

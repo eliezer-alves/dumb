@@ -20,7 +20,7 @@ export function Home() {
     <Page>
       <div className="h-full w-full px-8 pt-[4%] flex flex-col items-center xsm:w-2/3 xsm:px-0 lg:w-3/5 xl:w-1/2 mobile:px-4">
         <div className="flex-col-center mb-10">
-          <h1 className="font-bold text-center mb-10 mobile:text-left">Scrum Poker para timeboxing em equipes ágil</h1>
+          <h1 className="mb-10 font-bold text-center mobile:text-left">Scrum Poker para timeboxing em equipes ágil</h1>
           <h3 className="text-center">Ferramenta simples para fazer estimativas.</h3>
         </div>
 
