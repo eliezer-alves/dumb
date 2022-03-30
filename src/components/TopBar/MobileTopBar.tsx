@@ -7,7 +7,7 @@ export function MobileTopBar() {
   const { code, name } = useRoom();
 
   return (
-    <div className="w-full h-1/6 p-4 justify-start hidden mobile:block">
+    <div className="w-full h-1/10 p-4 justify-start hidden mobile:block">
       <div className="w-full h-14 flex justify-between items-center">
         {!code && <Logo />}
         { <ButtonShowSideBar /> }
