@@ -20,7 +20,7 @@ export function TaskSideBar() {
             className="p-1 link rounded-full hover:bg-gray-200" />
         </div>
         <div className="px-5 pb-2 overflow-y-auto">
-          {/* <TaskList /> */}
+          <TaskList />
         </div>
         <div className="h-1/3 pl-4 pr-6 pt-4 pb-8">
           <NewTask/>

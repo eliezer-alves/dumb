@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { SideBar } from "../SideBar";
 import { TopBar } from "../TopBar";
 import { Body } from "./Body";
 
@@ -8,9 +9,12 @@ type BodyProps = {
 
 export function Page({ children }: BodyProps) {
   return (
-    <div className="h-full flex-col-center">
-      <TopBar />
-      <Body>{children}</Body>
-    </div>
+    <>
+      <SideBar />
+      <div className="h-full flex-col-center">
+        <TopBar />
+        <Body>{children}</Body>
+      </div>
+    </>
   )
 }

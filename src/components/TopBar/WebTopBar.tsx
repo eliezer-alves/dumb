@@ -6,7 +6,6 @@ import { Profile } from "../Profile";
 import { RoomCode } from "../RoomCode";
 
 export function WebTopBar() {
-  const { user } = useAuth();  
   const { code } = useRoom();
 
   return (
@@ -17,7 +16,7 @@ export function WebTopBar() {
           { code && <RoomCode code={code} />}
           { code && <ButtonShowTasks /> }
         </div>
-        {user && <Profile avatar={user.avatar} name={user.name} />}
+        <Profile />
       </div>
     </div>
   )

@@ -39,6 +39,10 @@ h3 {
   @apply text-lg xsm:text-xl
 }
 
+.info {
+  @apply text-gray-400 text-xl
+}
+
 input {
   @apply m-1 py-3 px-6
   border-3 rounded-md

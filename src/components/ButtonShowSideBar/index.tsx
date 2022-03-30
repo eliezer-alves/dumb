@@ -2,10 +2,11 @@ import { useModals } from '../../hooks/useModals'
 import sideBarIcon from './images/side-bar-icon.svg'
 
 export function ButtonShowSideBar() {
-  const { showModal, setShowModal } = useModals()
+  const { setShowModal } = useModals()
   
   return (
     <div
+      onClick={() => {setShowModal('side-bar')}}
       className="
         h-14 w-14 p-2 flex-center
         rounded-full
