@@ -3,11 +3,11 @@ import { useModals } from "../../hooks/useModals";
 
 type ModalProps = {
   id: string;
-  styleClass?: string;
+  className?: string;
   children: ReactNode;
 }
 
-export function Modal({id, styleClass, children}: ModalProps) {
+export function Modal({id, className, children}: ModalProps) {
   const { showModal, setShowModal } = useModals()
 
   const handleShowModal = (e: any) => {
@@ -29,7 +29,7 @@ export function Modal({id, styleClass, children}: ModalProps) {
         z-10 absolute
         w-screen h-screen 
         bg-transparent-600
-        ${styleClass ?? 'flex justify-center items-start pt-10'}
+        ${className ?? 'flex justify-center items-start pt-10'}
     `}>      
       {children}      
     </div>

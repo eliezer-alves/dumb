@@ -8,7 +8,7 @@ export function TaskSideBar() {
   const { setShowModal } = useModals()
 
   return (
-    <Modal id={'tasks'} styleClass="w-full h-full flex justify-end">
+    <Modal id={'tasks'} className="w-full h-full flex justify-end">
       <div className="h-full px-4 flex flex-col justify-start bg-gray-50">
         <div className="h-1/12 p-10 flex items-center justify-between mobile:px-0">
           <h2>Tarefas</h2>
