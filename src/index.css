@@ -53,6 +53,9 @@ input {
   hover:border-gray-300
   focus:border-primary-300
   duration-200 ease-in-out
+  mobile:text-lg
+  mobile:px-2
+  mobile:border-2
 }
 
 textarea {
