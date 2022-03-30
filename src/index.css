@@ -97,6 +97,7 @@ textarea {
   text-xl font-semibold
   hover:opacity-70
   duration-200 ease-in-out
+  mobile:px-4
 }
 
 .btn-primary {

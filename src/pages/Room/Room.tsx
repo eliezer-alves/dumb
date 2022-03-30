@@ -42,7 +42,7 @@ export function Room() {
                   { 'btn btn-primary': taskToVote },
                   { 'btn btn-secondary border-3 text-gray-500 hover:cursor-no-drop': !taskToVote },
                 )}
-              >&emsp;Encerrar a rodada&emsp;</button>
+              >Encerrar a rodada</button>
             </Table>
             {currentUserRoom && <UserRoom key={currentUserRoom?.id} user={currentUserRoom} />}
             <Deck />
