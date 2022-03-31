@@ -1,22 +1,34 @@
-import { ReactNode } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useModals } from '../../hooks/useModals'
 import { Modal } from '../BaseModal'
 import { Profile } from '../Profile'
 import closeIcon from './images/close-icon.svg'
+import copyIcon from './images/copy-icon.svg'
 import infoIcon from './images/info-icon.svg'
-import signOutIcon from './images/sign-out-icon.svg'
 import loginIcon from './images/login-icon.svg'
 import gitHubIcon from './images/github-icon.svg'
+import { useParams } from "react-router-dom";
 
+type RoomParams = {
+  id: string
+}
 
-export function SideBar() {
+export function SideBar() {  
   const { user, signInWithGoogle, signOut } = useAuth()
   const { setShowModal } = useModals()
+  
+  const params = useParams<RoomParams>()
+  const roomCode = params.id ?? ''
+  console.log(roomCode);
+  
 
   const handleSignOut = () => {
     setShowModal(false)
     signOut()
+  }
+
+  function copyRoomCodeToClipboard() {
+    navigator.clipboard.writeText(roomCode)
   }
 
   return (
@@ -32,6 +44,14 @@ export function SideBar() {
             className="p-1 link rounded-full hover:bg-gray-200 flex justify-end"
           />
         </div>
+        {roomCode && (          
+          <div onClick={copyRoomCodeToClipboard} className="h-14 px-4 flex items-center gap-4 active:opacity-40">
+            <div className="w-[25px] h-[25px] bg-gray-400 rounded-md p-1">
+              <img src={copyIcon} alt="Sair da página" />
+            </div>
+            <span className="info">{roomCode}</span>
+          </div>
+        )}
         <div className="h-14 px-4 flex items-center gap-4">
           <img src={infoIcon} alt="Sair da página" />
           <span className="info">Sobre</span>
@@ -45,9 +65,6 @@ export function SideBar() {
           {user
             ? <span onClick={handleSignOut} className="info">Sign Out</span>
             : <span onClick={signInWithGoogle} className="info">Sign In</span>}
-        </div>
-        <div className="h-14 px-3 pt-5 flex items-center gap-4">
-          <button className="btn btn-primary w-full m-0">Fazer um PIX</button>
         </div>
       </div>
     </Modal>

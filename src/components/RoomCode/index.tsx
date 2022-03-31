@@ -3,9 +3,9 @@ import copyIcon from './images/copy.svg';
 type RoomCodeProps = {
     code: string;
 }
-export function RoomCode(props: RoomCodeProps) {
+export function RoomCode({ code }: RoomCodeProps) {
     function copyRoomCodeToClipboard() {
-        navigator.clipboard.writeText(props.code)
+        navigator.clipboard.writeText(code)
     }
 
     return (
@@ -16,7 +16,7 @@ export function RoomCode(props: RoomCodeProps) {
                 hover:cursor-pointer
                 hover:bg-gray-50
                 active:text-gray-400
-            ">#{props.code}</span>
+            ">#{code}</span>
             <button
                 className="h-14 px-6 flex-center bg-primary-300
                 border border-l-0 border-primary-300 rounded-r-lg
