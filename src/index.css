@@ -118,6 +118,10 @@ textarea {
   font-family: 'Fredoka', sans-serif;;
 }
 
+.nav-item {
+  @apply link hover:bg-gray-200
+}
+
 .link {
   @apply hover:cursor-pointer hover:text-secondary-300
   duration-200 ease-in-out

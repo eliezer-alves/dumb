@@ -32,8 +32,8 @@ export function SideBar() {
   }
 
   return (
-    <Modal id="side-bar" className="flex justify-start">
-      <div className="w-full flex flex-col justify-start bg-gray-50 divide-y">
+    <Modal id="side-bar" className="flex justify-start xsm:justify-end">
+      <div className="w-auto flex flex-col justify-start bg-gray-50 divide-y mobile:w-full">
         <div className="py-4 px-4 flex justify-between items-start mb-4">
           {user ? <Profile /> : <h2>Você não está logado 😕</h2>}
           <img
@@ -41,26 +41,26 @@ export function SideBar() {
             src={closeIcon}
             width="44px"
             alt="Fechar barra de tarefas"
-            className="p-1 link rounded-full hover:bg-gray-200 flex justify-end"
+            className="p-1 nav-item rounded-full hover:bg-gray-200 flex justify-end"
           />
         </div>
         {roomCode && (          
-          <div onClick={copyRoomCodeToClipboard} className="h-14 px-4 flex items-center gap-4 active:opacity-40">
+          <div onClick={copyRoomCodeToClipboard} className="nav-item h-14 px-4 flex items-center gap-4 active:opacity-40">
             <div className="w-[25px] h-[25px] bg-gray-400 rounded-md p-1">
               <img src={copyIcon} alt="Sair da página" />
             </div>
             <span className="info">{roomCode}</span>
           </div>
         )}
-        <div className="h-14 px-4 flex items-center gap-4">
+        <div className="nav-item h-14 px-4 flex items-center gap-4">
           <img src={infoIcon} alt="Sair da página" />
           <span className="info">Sobre</span>
         </div>
-        <div className="h-14 px-4 flex items-center gap-4">
+        <div className="nav-item h-14 px-4 flex items-center gap-4">
           <img src={gitHubIcon} alt="Icone GitHub" />
           <a href="https://github.com/eliezer-alves/dumb" target="blank" className="info">Repositório GitHub</a>
         </div>
-        <div className="h-14 px-4 flex items-center gap-4">
+        <div className="nav-item h-14 px-4 flex items-center gap-4">
           <img src={loginIcon} alt="Sair da página" />
           {user
             ? <span onClick={handleSignOut} className="info">Sign Out</span>
