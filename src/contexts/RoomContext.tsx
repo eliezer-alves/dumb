@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth"
+import { useModals } from "../hooks/useModals"
 import { database } from '../services/firebase'
 
 type UserRoom = {
@@ -68,6 +69,7 @@ export const RoomContext = createContext({} as RoomContextType)
 
 export function RoomContextProvider({ children }: RoomContextProviderProps) {  
   const { user } = useAuth()
+  const { setShowModal } = useModals()
   const params = useParams<RoomParams>()
   const roomCode = params.id ?? ''
   
@@ -171,7 +173,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     return {
       id: key,
       title: value.title,
-      votes: undefined,
+      votes: value.votes,
       numberOfVotes: value.numberOfVotes,
       sumOfVotes: value.sumOfVotes,
       average: value.average,
@@ -184,6 +186,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
       numberOfVotes: 0,
       sumOfVotes: 0,
       average: 0,
+      votes: {}
     })
   }
 
@@ -232,6 +235,7 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     taskRef.set(taskToVote)
     database.ref(`rooms/${roomCode}`).child('lastVotedTask').set(taskToVote)
     database.ref(`rooms/${roomCode}/taskToVote`).remove()
+    setShowModal('voting-result')
   }
 
   return (
