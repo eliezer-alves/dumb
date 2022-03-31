@@ -25,7 +25,7 @@ export function Deck() {
   }
 
   return (
-    <div className="h-40 flex-center gap-3">
+    <div className="max-w-full h-40 px-4 gap-3 flex justify-center items-center overflow-x-scroll mobile:justify-start">
       {
         cards.map(card =>{
           return (
@@ -33,7 +33,7 @@ export function Deck() {
               key={card}
               onClick={() => handleMyVote((selectedCard == card) ? undefined : card)}
               className={cx(
-                'flex-center w-14 h-24 text-2xl font-semibold border-2 rounded-md',
+                'flex-center w-14 h-24 text-2xl font-semibold border-2 rounded-md mobile:px-4',
                 'duration-200 ease-out',
                 {'border-primary-300 text-primary-300 hover:cursor-pointer': taskToVote},
                 {'border-gray-500 text-gray-500 hover:cursor-no-drop': !taskToVote},

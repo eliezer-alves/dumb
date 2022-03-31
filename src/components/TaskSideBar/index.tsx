@@ -9,7 +9,7 @@ export function TaskSideBar() {
 
   return (
     <Modal id={'tasks'} className="w-full h-full flex justify-end">
-      <div className="h-full px-4 flex flex-col justify-start bg-gray-50">
+      <div className="h-full px-4 flex flex-col justify-start bg-gray-50 mobile:w-full">
         <div className="min-h-1/12 p-2 flex items-center justify-between mobile:px-0 mobile:py-5">
           <h2>&nbsp;Tarefas</h2>
           <img

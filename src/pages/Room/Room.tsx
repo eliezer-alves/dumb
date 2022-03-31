@@ -45,7 +45,9 @@ export function Room() {
               >Encerrar a rodada</button>
             </Table>
             {currentUserRoom && <UserRoom key={currentUserRoom?.id} user={currentUserRoom} />}
-            <Deck />
+            {/* <div className="max-w-full flex justify-start items-center overflow-x-scroll"> */}
+              <Deck />
+            {/* </div> */}
           </div>
         </div>
       </Page>
