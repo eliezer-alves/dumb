@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import { Page } from "../../components/Page";
-import { Main } from "../../components/Page/Main";
-import { useAuth } from "../../hooks/useAuth";
+import { Page } from "../../components/Page"
+import { useAuth } from "../../hooks/useAuth"
 
 export function Home() {
   const navigate = useNavigate();
-  const { user, signInWithGoogle, signOut } = useAuth();
+  const { user, signInWithGoogle } = useAuth()
 
 	async function handleCreateRoom() {
 		if (!user) {
-			await signInWithGoogle();
+			await signInWithGoogle()
 		}
 
     navigate('/rooms/new')
