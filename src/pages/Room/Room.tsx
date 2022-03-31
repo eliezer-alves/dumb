@@ -8,6 +8,7 @@ import { useRoom } from "../../hooks/useRoom"
 import { useAuth } from "../../hooks/useAuth"
 
 import cx from 'classnames';
+import { VotingResult } from "../../components/VotingResult"
 
 export function Room() {
   const { user } = useAuth()
@@ -16,6 +17,7 @@ export function Room() {
   return (
     <>
       <TaskSideBar />
+      <VotingResult />
       <Page>
         <div className="w-full h-full flex flex-col">
           <div className="w-full h-full flex flex-col items-center justify-between">

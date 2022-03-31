@@ -20,7 +20,7 @@ export function SideBar() {
   }
 
   return (
-    <Modal id={'side-bar'} className="flex justify-start">
+    <Modal id="side-bar" className="flex justify-start">
       <div className="w-full flex flex-col justify-start bg-gray-50 divide-y">
         <div className="py-4 px-4 flex justify-between items-start mb-4">
           {user ? <Profile /> : <h2>Você não está logado 😕</h2>}
