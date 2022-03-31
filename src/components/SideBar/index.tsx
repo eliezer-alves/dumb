@@ -18,9 +18,7 @@ export function SideBar() {
   const { setShowModal } = useModals()
   
   const params = useParams<RoomParams>()
-  const roomCode = params.id ?? ''
-  console.log(roomCode);
-  
+  const roomCode = params.id ?? ''  
 
   const handleSignOut = () => {
     setShowModal(false)
