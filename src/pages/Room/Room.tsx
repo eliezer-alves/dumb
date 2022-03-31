@@ -11,8 +11,19 @@ import cx from 'classnames';
 import { VotingResult } from "../../components/VotingResult"
 
 export function Room() {
-  const { user } = useAuth()
+  const { user, signInWithGoogle } = useAuth()
   const { usersRoom, currentUserRoom, taskToVote, handleCloseVote } = useRoom()
+
+  if (!user) {
+    return (
+      <>
+        <div className="w-full px-10 h-full flex-col-center gap-8">
+          <h2>Parece que você ainda não está logado 😕</h2>
+          <button onClick={signInWithGoogle} className="btn btn-primary">Entrar com Google 😏</button>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
