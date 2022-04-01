@@ -32,9 +32,10 @@ export function Room() {
     <>
 
       {name ? (
-        <Page>
-          <TaskSideBar />
-          <VotingResult />
+        <>
+        <TaskSideBar />
+        <VotingResult />
+        <Page>          
           <div className="w-full h-full flex flex-col">
             <div className="w-full h-full flex flex-col items-center justify-between">
               <div className="w-full flex-center gap-8">
@@ -69,6 +70,7 @@ export function Room() {
             </div>
           </div>
         </Page>
+        </>
       )
         : (
           <div className="w-full h-full px-10 flex-center">

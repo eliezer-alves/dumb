@@ -26,8 +26,8 @@ export function Modal({id, className, children}: ModalProps) {
       onClick={handleShowModal}
       data-value={'base-modal'}
       className={`
-        z-10 absolute
-        w-screen h-screen 
+        z-20 absolute
+        w-screen h-screen
         bg-transparent-600
         ${className ?? 'flex justify-center items-start pt-10'}
     `}>      
