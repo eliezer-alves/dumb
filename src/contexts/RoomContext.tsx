@@ -8,7 +8,8 @@ type UserRoom = {
 	id: string
 	name: string
 	avatar: string
-  voted: boolean
+  voted?: boolean
+  showResult?:boolean
 }
 
 type FirebaseUsersRoom = Record<string, UserRoom>
@@ -82,15 +83,16 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
   const [lastVotedTask, setLastVotedTask] = useState<Task|undefined>()
 
   useEffect(() => {
-    if (!user) return    
-    database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
-    // database.ref(`rooms/${roomCode}/users/${user.id}`).on('value', userRoom => {
-    //   if (!userRoom.val()) {
-    //     console.log(user);
+    if (!user) return
+    database.ref(`rooms/${roomCode}/users/${user.id}`).on('value', firebaseUser => {
+      if (!firebaseUser.val()) {
+        console.log(firebaseUser.val());
         
-    //     database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
-    //   }
-    // })
+        database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
+      }
+      
+    })
+    // database.ref(`rooms/${roomCode}/users`).child(user.id).set(user)
 
     const roomRef = database.ref(`rooms/${roomCode}`)
     roomRef.on('value', room => {
@@ -235,7 +237,6 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     taskRef.set(taskToVote)
     database.ref(`rooms/${roomCode}`).child('lastVotedTask').set(taskToVote)
     database.ref(`rooms/${roomCode}/taskToVote`).remove()
-    setShowModal('voting-result')
   }
 
   return (
