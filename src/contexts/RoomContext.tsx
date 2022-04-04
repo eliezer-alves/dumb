@@ -64,6 +64,7 @@ type RoomContextType = {
   handleTaskToVote(task:Task|undefined): void
   handleVotingIntention(value: number): void
   handleCloseVote(): void
+  handleCloseResultForUser(): void
 }
 
 export const RoomContext = createContext({} as RoomContextType)
@@ -237,10 +238,33 @@ export function RoomContextProvider({ children }: RoomContextProviderProps) {
     taskRef.set(taskToVote)
     database.ref(`rooms/${roomCode}`).child('lastVotedTask').set(taskToVote)
     database.ref(`rooms/${roomCode}/taskToVote`).remove()
+
+    usersRoom.map(user=>{
+      database.ref(`rooms/${roomCode}/users/${user.id}`).child('showResult').set(true)
+    })
+  }
+
+  const handleCloseResultForUser = () => {
+    database.ref(`rooms/${roomCode}/users/${currentUserRoom?.id}`).child('showResult').set(false)
   }
 
   return (
-    <RoomContext.Provider value={{name, code, usersRoom, currentUserRoom, tasks, taskToVote, lastVotedTask, createTask, deleteTask, handleVotingIntention, handleTaskToVote, handleCloseVote}}>
+    <RoomContext.Provider value={{
+        name,
+        code,
+        usersRoom,
+        currentUserRoom,
+        tasks,
+        taskToVote,
+        lastVotedTask,
+        createTask,
+        deleteTask,
+        handleVotingIntention,
+        handleTaskToVote,
+        handleCloseVote,
+        handleCloseResultForUser
+      }
+    }>
       {children}
     </RoomContext.Provider>
   )

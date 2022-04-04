@@ -9,10 +9,20 @@ import { useAuth } from "../../hooks/useAuth"
 
 import cx from 'classnames';
 import { VotingResult } from "../../components/VotingResult"
+import { useEffect } from "react"
+import { useModals } from "../../hooks/useModals"
 
 export function Room() {
   const { user, signInWithGoogle } = useAuth()
+  const { setShowModal } = useModals()
   const { name, usersRoom, currentUserRoom, taskToVote, handleCloseVote } = useRoom()
+
+  useEffect(() => {
+    if (currentUserRoom?.showResult) {
+      setShowModal('voting-result')
+    }
+    return () => {}
+  }, [currentUserRoom])
 
 
   if (!user) {
