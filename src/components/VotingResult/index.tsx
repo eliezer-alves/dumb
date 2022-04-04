@@ -12,7 +12,7 @@ export function VotingResult() {
   }
 
   return (
-    <Modal id="voting-result" className="mobile:px-2 mobile:py-5">
+    <Modal id="voting-result" className="flex justify-center items-start pt-10 mobile:px-2 mobile:py-5">
       <div className="px-5 pt-5 pb-3 flex flex-col gap-4 bg-white rounded-lg mobile:p-5">
         <span className="text-3xl text-primary-300 font-semibold font-fredoka">Resultado da Votação</span>
         <div className="px-5 py-2 flex flex-col bg-gray-100 rounded-lg mobile:p-5">
