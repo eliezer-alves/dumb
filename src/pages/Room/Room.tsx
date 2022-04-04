@@ -14,8 +14,6 @@ export function Room() {
   const { user, signInWithGoogle } = useAuth()
   const { name, usersRoom, currentUserRoom, taskToVote, handleCloseVote } = useRoom()
 
-  console.log(name);
-
 
   if (!user) {
     return (

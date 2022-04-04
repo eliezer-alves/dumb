@@ -22,9 +22,14 @@ export function SideBar() {
   const params = useParams<RoomParams>()
   const roomCode = params.id ?? ''  
 
-  const handleSignOut = () => {
-    setShowModal(false)
-    signOut()
+  const handleSession = () => {
+    if (user) {
+      setShowModal(false)
+      signOut()
+      return
+    }
+
+    signInWithGoogle()
   }
 
   function copyRoomCodeToClipboard() {
@@ -64,11 +69,11 @@ export function SideBar() {
           <img src={gitHubIcon} alt="github icon" />
           <a href="https://github.com/eliezer-alves/dumb" target="blank" className="info">Repositório GitHub</a>
         </div>
-        <div className="nav-item h-14 px-4 flex items-center gap-4">
+        <div onClick={handleSession} className="nav-item h-14 px-4 flex items-center gap-4">
           <img src={loginIcon} alt="Sair da página" />
           {user
-            ? <span onClick={handleSignOut} className="info">Sign Out</span>
-            : <span onClick={signInWithGoogle} className="info">Sign In</span>}
+            ? <span className="info">Sign Out</span>
+            : <span className="info">Sign In</span>}
         </div>
       </div>
     </Modal>

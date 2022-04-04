@@ -1,26 +1,26 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { firebase, auth } from '../services/firebase';
+import { createContext, ReactNode, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { firebase, auth } from '../services/firebase'
 import { database } from '../services/firebase'
 
 type User = {
-	id: string;
-	name: string;
-	avatar: string;
+	id: string
+	name: string
+	avatar: string
 }
 
 type AuthContextType = {
-	user: User | undefined;
-	signInWithGoogle: () => void;
-	signOut: () => void;
-	handleNavigate: (service: string) => void;
+	user: User | undefined
+	signInWithGoogle: () => void
+	signOut: () => void
+	handleNavigate: (service: string) => void
 }
 
 type AuthContextProviderProps = {
-	children: ReactNode;
+	children: ReactNode
 }
 
-export const AuthContext = createContext({} as AuthContextType);
+export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider(props: AuthContextProviderProps) {
 	const navigate = useNavigate()
@@ -83,12 +83,14 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
 	async function signOut() {		
 		if (window.confirm(`Tem certeza que não desej mais continuar como ${user?.name}?`)) {			
+			
 			firebase.auth().signOut().catch(function(error) {
 				alert('Houve augum problema ao efetuar seu logout! Tente novamente.');
-			});
-		}
+			})
 
-		setUser(undefined);
+			setUser(undefined)
+			navigate('/')
+		}
 	}
 
 	function handleNavigate(service: string) {
