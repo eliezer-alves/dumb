@@ -8,10 +8,10 @@ export class HttpClientSpy implements HttpClient {
     status: HttpStatusCode.ok
   }
 
-  request(params: HttpRequest): Promise<any> {
+  request(params: HttpRequest): Promise<HttpResponse> {
     this.url = params.url
     this.method = params.method
     this.body = params.body
-    return Promise.resolve()
+    return Promise.resolve(this.response)
   }
 }
