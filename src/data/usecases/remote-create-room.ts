@@ -1,5 +1,5 @@
 import { CreateRoomParams } from "@/domain/usecases/create-room";
-import { AccessDeniedError } from "@/tests/domain/errors/access-denied-error";
+import { AccessDeniedError, UnexpectedError } from "@/tests/domain/errors";
 import { HttpClient, HttpMethod, HttpStatusCode } from "../protocols/http";
 
 export class RemoteCreateRoom {
@@ -25,7 +25,7 @@ export class RemoteCreateRoom {
           throw new AccessDeniedError()            
     
       default:
-        throw new Error()
+        throw new UnexpectedError()
     }
   }
 }
