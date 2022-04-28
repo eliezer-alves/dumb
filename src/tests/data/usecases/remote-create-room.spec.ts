@@ -52,5 +52,15 @@ describe('RemoteCreateRoom', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
+  test('Should throw UnexpectedError if HttpClient returns 500', async() => {
+    const { sut, httpClientSpy } = sutFactory()
+    httpClientSpy.response = {
+      status: HttpStatusCode.serverError,
+    }
+
+    const promise = sut.make(mockCreateRoomParams())
+    await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
 
 })
