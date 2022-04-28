@@ -32,7 +32,7 @@ describe('RemoteCreateRoom', () => {
     expect(httpClientSpy.body).toBe(newRoomParams)
   })
 
-  test('Should throw Unauthorized if HttpClient returns 403', async() => {
+  test('Should throw UnauthorizedError if HttpClient returns 403', async() => {
     const { sut, httpClientSpy } = sutFactory()
     httpClientSpy.response = {
       status: HttpStatusCode.unauthorized,
