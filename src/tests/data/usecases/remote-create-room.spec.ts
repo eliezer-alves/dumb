@@ -1,6 +1,6 @@
 import { HttpClientSpy } from '@/tests/data/mocks'
 import { RemoteCreateRoom } from '@/data/usecases/remote-create-room'
-import { mockCreateRoomParams } from '@/tests/domain/mocks'
+import { mockCreateRoomParams, mockRoomModel } from '@/tests/domain/mocks'
 import faker from '@faker-js/faker'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@/tests/domain/errors'
@@ -72,5 +72,16 @@ describe('RemoteCreateRoom', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
+  test('Ensures that data response is correct when HttpClient returns 200', async() => {
+    const { sut, httpClientSpy } = sutFactory()
+    const mockedRoomModel = mockRoomModel()
+    httpClientSpy.response = {
+      status: HttpStatusCode.ok,
+      body: mockedRoomModel
+    }
+
+    const room = await sut.make(mockCreateRoomParams())
+    expect(room).toEqual(mockedRoomModel)
+  })
 
 })
