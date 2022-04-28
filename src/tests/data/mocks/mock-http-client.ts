@@ -1,6 +1,6 @@
 import { HttpClient, HttpRequest, HttpResponse, HttpStatusCode } from '@/data/protocols/http'
 
-export class HttpClientSpy implements HttpClient {
+export class HttpClientSpy<T = any> implements HttpClient {
   url?: string
   method?: string
   body?: any
@@ -8,7 +8,7 @@ export class HttpClientSpy implements HttpClient {
     status: HttpStatusCode.ok
   }
 
-  request(params: HttpRequest): Promise<HttpResponse> {
+  request(params: HttpRequest): Promise<HttpResponse<T>> {
     this.url = params.url
     this.method = params.method
     this.body = params.body

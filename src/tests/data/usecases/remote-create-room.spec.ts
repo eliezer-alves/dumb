@@ -4,6 +4,7 @@ import { mockCreateRoomParams, mockRoomModel } from '@/tests/domain/mocks'
 import faker from '@faker-js/faker'
 import { HttpStatusCode } from '@/data/protocols/http'
 import { AccessDeniedError, UnexpectedError } from '@/tests/domain/errors'
+import { RoomModel } from '@/domain/models'
 
 type SutTypes = {
   sut: RemoteCreateRoom
@@ -11,7 +12,7 @@ type SutTypes = {
 }
 
 const sutFactory = (url = ''): SutTypes => {
-  const httpClientSpy = new HttpClientSpy()
+  const httpClientSpy = new HttpClientSpy<RoomModel>()
   const sut = new RemoteCreateRoom(url, httpClientSpy)
 
   return {

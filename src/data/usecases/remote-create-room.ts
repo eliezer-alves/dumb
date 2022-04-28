@@ -1,8 +1,9 @@
-import { CreateRoomParams } from "@/domain/usecases/create-room";
+import { RoomModel } from "@/domain/models";
+import { CreateRoom, CreateRoomParams } from "@/domain/usecases/create-room";
 import { AccessDeniedError, UnexpectedError } from "@/tests/domain/errors";
 import { HttpClient, HttpMethod, HttpStatusCode } from "../protocols/http";
 
-export class RemoteCreateRoom {
+export class RemoteCreateRoom implements CreateRoom {
   private method:HttpMethod = 'post'
 
   constructor(
@@ -10,7 +11,7 @@ export class RemoteCreateRoom {
     private readonly httpClient: HttpClient
   ) {}
 
-  async make(params: CreateRoomParams): Promise<any> {
+  async make(params: CreateRoomParams): Promise<RoomModel> {
     const httpResponse = await this.httpClient.request({
       url: this.url,
       method: this.method,

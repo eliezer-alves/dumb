@@ -18,11 +18,11 @@ export type HttpRequest = {
   method: HttpMethod
 }
 
-export type HttpResponse = {
+export type HttpResponse<T = any> = {
   status: HttpStatusCode
-  body?: any
+  body?: T
 }
 
-export interface HttpClient {
-  request(params: HttpRequest): Promise<HttpResponse>
+export interface HttpClient<T = any> {
+  request(params: HttpRequest): Promise<HttpResponse<T>>
 }
