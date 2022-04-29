@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
   roots: ['<rootDir>/src'],
   collectCoverageFrom: ['<rootDir>/src/**/*.{ts}'],
@@ -8,5 +9,5 @@ module.exports = {
   },
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
-  },
+  }
 }

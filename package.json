@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.3.1",
-    "firebase": "^9.6.8",
+    "firebase": "^9.7.0",
     "install": "^0.13.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -16,11 +16,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --setupFiles dotenv/config",
     "test:watch": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
-    "clear_jest": "jest --clearCache",
+    "jest_clear": "jest --clearCache",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
