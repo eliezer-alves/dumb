@@ -27,12 +27,10 @@ export class MockFirebaseDatabase {
   constructor () {}
 
   public mockPush(expectedResponse:any = mockHttpResponse) {
-    console.log(this.isError)
     if (this.isError) {
       this.mockedFirebaseDatabase.push.mockClear().mockImplementation(() => {
         throw new FirebaseError(this.errorCode, this.errorMessage)
       })
-      console.log('here')
       
     } else {
       this.mockedFirebaseDatabase.push.mockClear().mockResolvedValue(expectedResponse)

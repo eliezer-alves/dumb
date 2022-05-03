@@ -31,9 +31,19 @@ describe('FirebaseRemoteService', () => {
   test('Should call firebase with correct values', async() => {    
     const { sut,  mockFirebaseDatabase} = makeSut()
     const mockedPush = mockFirebaseDatabase.mockPush()
+
     await sut.request(requestCreateRoom)
 
     expect(mockedPush.push).toHaveBeenCalledWith(undefined, requestCreateRoom.body)
+  })
+
+  test('Should return correct response', async() => {
+    const { sut, mockFirebaseDatabase } = makeSut()
+    mockFirebaseDatabase.mockPush(requestCreateRoom.body)
+    
+    const response = await sut.request(requestCreateRoom)
+    
+    expect(requestCreateRoom.body).toEqual(response)
   })
 
   test('Should throw UnauthorizedError if firebase returns PERMISSION_DENIED', async() => {
