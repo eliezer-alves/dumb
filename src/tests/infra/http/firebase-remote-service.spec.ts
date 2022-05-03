@@ -2,32 +2,39 @@ import { HttpRequest } from "@/data/protocols/http"
 import { FirebaseRemoteService } from "@/infra/http/firebase-remote-service"
 import { AccessDeniedError } from "@/tests/domain/errors"
 import { mockCreateRoomParams } from "@/tests/domain/mocks"
+import { mockFirebaseDatabase } from '@/tests/infra/mocks/mock-firebase-database'
+
+jest.mock('firebase/app');
+jest.mock('firebase/database');
+
 
 describe('FirebaseRemoteService', () => {
-  // test('Ensures that the params in adapter FirebaseRemoteService is currect', async() => {
-  //   const params: HttpRequest = {
-  //     url: 'rooms/',
-  //     method: 'post',
-  //     body: mockCreateRoomParams()
-  //   }
-  //   const sut = new FirebaseRemoteService()
-  //   const response = await sut.request(params)
-  //   console.log(response);
-    
-  //   // const mock = new MockFirebaseRemoteService()
-  //   expect({}).toEqual({})
-  // })
-
-  test('Should throw UnauthorizedError if adapter FirebaseRemoteService returns PERMISSION_DENIED', async() => {
+  test('Ensures that the params in adapter FirebaseRemoteService is currect', async() => {
     const params: HttpRequest = {
       url: 'rooms/',
       method: 'post',
       body: mockCreateRoomParams()
     }
+
+    const mockedFirebaseDatabase = mockFirebaseDatabase()
+
     const sut = new FirebaseRemoteService()
-    const promise = sut.request(params)
-    
-    // const mock = new MockFirebaseRemoteService()
-    await expect(promise).rejects.toThrow(new AccessDeniedError())
+    await sut.request(params)
+
+    expect(mockedFirebaseDatabase.push).toHaveBeenCalledWith(undefined, params.body)
   })
+
+  // test('Should throw UnauthorizedError if adapter FirebaseRemoteService returns PERMISSION_DENIED', async() => {
+
+  //   const request: HttpRequest = {
+  //     url: 'rooms/',
+  //     method: 'post',
+  //     body: mockCreateRoomParams()
+  //   }
+
+  //   const sut = new FirebaseRemoteService()
+  //   const promise = sut.request(request)
+    
+  //   await expect(promise).rejects.toThrow(new AccessDeniedError())
+  // })
 })
