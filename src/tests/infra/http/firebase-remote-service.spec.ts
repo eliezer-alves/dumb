@@ -2,9 +2,8 @@ import { HttpRequest } from "@/data/protocols/http"
 import { FirebaseRemoteService } from "@/infra/http/firebase-remote-service"
 import { AccessDeniedError } from "@/tests/domain/errors"
 import { mockCreateRoomParams } from "@/tests/domain/mocks"
-import { MockFirebaseDatabase } from '@/tests/infra/mocks/mock-firebase-database'
+import { MockFirebaseDatabase, FirebaseErrorCode } from '@/tests/infra/mocks/mock-firebase-database'
 
-jest.mock('firebase/app');
 jest.mock('firebase/database');
 
 const requestCreateRoom: HttpRequest = {
@@ -28,10 +27,8 @@ const makeSut = (): SutTypes => {
   }
 }
 
-
 describe('FirebaseRemoteService', () => {
-  test('Ensures that the params in adapter FirebaseRemoteService is currect', async() => {
-    
+  test('Should call firebase with correct values', async() => {    
     const { sut,  mockFirebaseDatabase} = makeSut()
     const mockedPush = mockFirebaseDatabase.mockPush()
     await sut.request(requestCreateRoom)
@@ -39,10 +36,12 @@ describe('FirebaseRemoteService', () => {
     expect(mockedPush.push).toHaveBeenCalledWith(undefined, requestCreateRoom.body)
   })
 
-  test('Should throw UnauthorizedError if adapter FirebaseRemoteService returns PERMISSION_DENIED', async() => {
+  test('Should throw UnauthorizedError if firebase returns PERMISSION_DENIED', async() => {
+    const { sut, mockFirebaseDatabase } = makeSut()
+    mockFirebaseDatabase.throwError(FirebaseErrorCode.PERMISSION_DENIED)
+    mockFirebaseDatabase.mockPush()
 
-    const { sut } = makeSut()
-    const promise = sut.request(requestCreateRoom)
+    const promise = sut.request(requestCreateRoom)    
     
     await expect(promise).rejects.toThrow(new AccessDeniedError())
   })
