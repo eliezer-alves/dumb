@@ -5,9 +5,13 @@ export const mockHttpResponse = (): any => ({
   key: faker.random.alphaNumeric(10)
 })
 
-export const mockFirebaseDatabase = (expectedResponse: any = mockHttpResponse): jest.Mocked<typeof firebaseDatabase> => {
-  const mockedFirebaseDatabase = firebaseDatabase as jest.Mocked<typeof firebaseDatabase>
-  mockedFirebaseDatabase.push.mockClear().mockResolvedValue(expectedResponse)
-  
-  return mockedFirebaseDatabase
+export class MockFirebaseDatabase {
+  private mockedFirebaseDatabase = firebaseDatabase as jest.Mocked<typeof firebaseDatabase>
+
+  constructor () {}
+
+  public mockPush(expectedResponse:any = mockHttpResponse) {
+    this.mockedFirebaseDatabase.push.mockClear().mockResolvedValue(expectedResponse)
+    return this.mockedFirebaseDatabase
+  }
 }
