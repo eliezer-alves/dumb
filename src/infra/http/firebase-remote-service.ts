@@ -1,7 +1,7 @@
 import { HttpRequest, HttpResponse, HttpStatusCode } from "@/data/protocols/http";
 import { getDatabase, ref, push } from "firebase/database";
 import { app } from "@/infra/firebase-remote-service/firebase"
-import { AccessDeniedError } from "@/tests/domain/errors";
+import { AccessDeniedError, UnexpectedError } from "@/tests/domain/errors";
 
 export class FirebaseRemoteService {
   private db
@@ -32,8 +32,10 @@ export class FirebaseRemoteService {
       if (e.code === 'PERMISSION_DENIED') {
         throw new AccessDeniedError()
       }
-    }
 
+      throw new UnexpectedError()
+    }
+    
     return Promise.resolve(response)
   }
 }
