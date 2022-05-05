@@ -1,9 +1,9 @@
-import { HttpRequest, HttpResponse, HttpStatusCode } from "@/data/protocols/http";
+import { HttpClient, HttpRequest, HttpResponse, HttpStatusCode } from "@/data/protocols/http";
 import { getDatabase, ref, push } from "firebase/database";
 import { app } from "@/infra/firebase-remote-service/firebase"
 import { AccessDeniedError, UnexpectedError } from "@/tests/domain/errors";
 
-export class FirebaseRemoteService {
+export class FirebaseHttpClient implements HttpClient {
   private db
   private defaultResponse: HttpResponse = {
     status: HttpStatusCode.badRequest,

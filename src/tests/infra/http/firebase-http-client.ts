@@ -1,5 +1,5 @@
 import { HttpRequest } from "@/data/protocols/http"
-import { FirebaseRemoteService } from "@/infra/http/firebase-remote-service"
+import { FirebaseHttpClient } from "@/infra/http/firebase-http-client"
 import { AccessDeniedError } from "@/tests/domain/errors"
 import { mockCreateRoomParams } from "@/tests/domain/mocks"
 import { MockFirebaseDatabase, FirebaseErrorCode } from '@/tests/infra/mocks/mock-firebase-database'
@@ -13,12 +13,12 @@ const requestCreateRoom: HttpRequest = {
 }
 
 type SutTypes = {
-  sut: FirebaseRemoteService,
+  sut: FirebaseHttpClient,
   mockFirebaseDatabase: MockFirebaseDatabase
 }
 
 const makeSut = (): SutTypes => {
-  const sut = new FirebaseRemoteService()
+  const sut = new FirebaseHttpClient()
   const mockFirebaseDatabase = new MockFirebaseDatabase()
 
   return {
@@ -27,7 +27,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('FirebaseRemoteService', () => {
+describe('FirebaseHttpClient', () => {
   test('Should call firebase with correct values', async() => {    
     const { sut,  mockFirebaseDatabase} = makeSut()
     const mockedPush = mockFirebaseDatabase.mockPush()
@@ -40,7 +40,7 @@ describe('FirebaseRemoteService', () => {
   test('Should return correct response', async() => {
     const { sut, mockFirebaseDatabase } = makeSut()
     mockFirebaseDatabase.mockPush(requestCreateRoom.body)
-    
+
     const response = await sut.request(requestCreateRoom)
     
     expect(requestCreateRoom.body).toEqual(response)
