@@ -2280,6 +2280,13 @@
   "resolved" "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz"
   "version" "1.2.4"
 
+"@types/react-dom@^18.0.3":
+  "integrity" "sha512-1RRW9kst+67gveJRYPxGmVy8eVJ05O43hg77G2j5m76/RFJtMbcfAs2viQ2UNsvvDg8F7OfQZx8qQcl6ymygaQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.0.3.tgz"
+  "version" "18.0.3"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-router-dom@^5.3.3":
   "integrity" "sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw=="
   "resolved" "https://registry.npmjs.org/@types/react-router-dom/-/react-router-dom-5.3.3.tgz"
